@@ -1,16 +1,6 @@
 name: Check
 on:
-  push:
-    paths:
-      - .github/workflows/check.yml
-      - "**.dart"
-      - analysis_options.yaml
-      - pubspec.lock
-      - pubspec.yaml
-      - android/**
-      - ios/**
-      - macos/**
-      - web/**
+  workflow_dispatch:
   pull_request:
     paths:
       - .github/workflows/check.yml
@@ -98,7 +88,7 @@ jobs:
       - name: Run flutter doctor
         run: flutter doctor -v
       - name: Set up keystore
-        run: echo '${{ secrets.ANDROID_STORE }}' | base64 --decode > key.jks
+        run: echo '${{ secrets.ANDROID_STORE }}' | base64 --decode > android/app/key.jks
       - name: Build
         run: flutter build appbundle ${{ matrix.flavor }}
         env:

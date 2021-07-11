@@ -1,18 +1,6 @@
 name: Integration Tests
 on:
-  push:
-    paths:
-      - .github/workflows/integration-tests.yml
-      - assets/**
-      - integration_test/**
-      - lib/**
-      - test_driver/**
-      - pubspec.lock
-      - pubspec.yaml
-      - android/**
-      - ios/**
-      - macos/**
-      - web/**
+  workflow_dispatch:
   pull_request:
     paths:
       - .github/workflows/integration-tests.yml
