@@ -30,7 +30,7 @@ flutter_icons:
   adaptive_icon_background: assets/gen/adaptive_background.png
 
 flutter_native_splash:
-  color: "#F6F6FF"
-  color_dark: "#192142"
+  color: "#F3F6FF"
+  color_dark: "#2E3440"
   image: assets/gen/splash.png
   # android12: true
