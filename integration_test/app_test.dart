@@ -7,10 +7,10 @@ void main() {
 
   group('App', () {
     testWidgets('HomePage is rendered', (tester) async {
-      app.main();
+      await app.main();
       await tester.pumpAndSettle();
 
-      expect(find.text('App'), findsOneWidget);
+      expect(find.text('Home'), findsOneWidget);
     });
   });
 }
