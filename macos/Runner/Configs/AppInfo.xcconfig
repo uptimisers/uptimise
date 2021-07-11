@@ -8,7 +8,7 @@
 PRODUCT_NAME = uptimise
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.uptimise.uptimise
+PRODUCT_BUNDLE_IDENTIFIER = com.uptimisers.uptimise
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2021 com.uptimise. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2021 com.uptimisers. All rights reserved.

@@ -44,7 +44,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.uptimise.uptimise"
+        applicationId "com.uptimisers.uptimise"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode flutterVersionCode.toInteger()

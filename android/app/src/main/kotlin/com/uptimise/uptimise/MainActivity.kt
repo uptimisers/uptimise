@@ -1,4 +1,4 @@
-package com.uptimise.uptimise
+package com.uptimisers.uptimise
 
 import io.flutter.embedding.android.FlutterActivity
 
