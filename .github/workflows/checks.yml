@@ -1,17 +1,12 @@
-name: Check
+name: Checks
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
   pull_request:
-    paths:
-      - .github/workflows/check.yml
-      - "**.dart"
-      - analysis_options.yaml
-      - pubspec.lock
-      - pubspec.yaml
-      - android/**
-      - ios/**
-      - macos/**
-      - web/**
+    branches:
+      - main
 jobs:
   # Detect changes
   changes:
@@ -54,7 +49,6 @@ jobs:
     needs: changes
     if: ${{ needs.changes.outputs.analyze == 'true' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -75,7 +69,6 @@ jobs:
     needs: changes
     if: ${{ needs.changes.outputs.build-android == 'true' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
@@ -103,7 +96,6 @@ jobs:
     needs: changes
     if: ${{ needs.changes.outputs.build-ios == 'true' }}
     runs-on: macos-latest
-    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
@@ -126,7 +118,6 @@ jobs:
     if: "false"
     # if: ${{ needs.changes.outputs.build-macos == 'true' }}
     runs-on: macos-latest
-    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
@@ -149,7 +140,6 @@ jobs:
     needs: changes
     if: ${{ needs.changes.outputs.build-web == 'true' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:

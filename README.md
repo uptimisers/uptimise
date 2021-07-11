@@ -6,14 +6,11 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/uptimisers/uptimise/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/uptimisers/uptimise" alt="License" />
-  </a>&nbsp;
   <a href="https://github.com/uptimisers/uptimise/releases">
     <img src="https://img.shields.io/github/v/release/uptimisers/uptimise?include_prereleases" alt="Releases" />
   </a>&nbsp;
-  <a href="https://github.com/uptimisers/uptimise/actions/workflows/check.yml">
-    <img src="https://img.shields.io/github/workflow/status/uptimisers/uptimise/Check/main?label=checks" alt="Checks" />
+  <a href="https://github.com/uptimisers/uptimise/actions/workflows/checks.yml">
+    <img src="https://img.shields.io/github/workflow/status/uptimisers/uptimise/Checks/main?label=checks" alt="Checks" />
   </a>&nbsp;
   <a href="https://github.com/uptimisers/uptimise/actions/workflows/integration-tests.yml">
     <img src="https://img.shields.io/github/workflow/status/uptimisers/uptimise/Integration%20Tests/main?label=integration%20tests" alt="Integration Tests" />
