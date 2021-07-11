@@ -13,8 +13,24 @@ dependencies: # Unsupported OS(s) listed in comments
     sdk: flutter
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.9.0
+  flutter_native_splash: ^1.0.0
   flutter_test:
     sdk: flutter
 
 flutter:
   uses-material-design: true
+
+flutter_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: assets/gen/app_icon.png
+  adaptive_icon_foreground: assets/gen/adaptive_foreground.png
+  adaptive_icon_background: assets/gen/adaptive_background.png
+
+flutter_native_splash:
+  color: "#F6F6FF"
+  color_dark: "#192142"
+  image: assets/gen/splash.png
+  # android12: true
