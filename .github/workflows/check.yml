@@ -1,0 +1,175 @@
+name: Check
+on:
+  push:
+    paths:
+      - .github/workflows/check.yml
+      - "**.dart"
+      - analysis_options.yaml
+      - pubspec.lock
+      - pubspec.yaml
+      - android/**
+      - ios/**
+      - macos/**
+      - web/**
+  pull_request:
+    paths:
+      - .github/workflows/check.yml
+      - "**.dart"
+      - analysis_options.yaml
+      - pubspec.lock
+      - pubspec.yaml
+      - android/**
+      - ios/**
+      - macos/**
+      - web/**
+jobs:
+  # Detect changes
+  changes:
+    name: Check for changes
+    runs-on: ubuntu-latest
+    outputs:
+      analyze: ${{ steps.filter.outputs.all || steps.filter.outputs.analyze }}
+      build-android: ${{ steps.filter.outputs.all || steps.filter.outputs.build-all || steps.filter.outputs.build-android }}
+      build-ios: ${{ steps.filter.outputs.all || steps.filter.outputs.build-all || steps.filter.outputs.build-ios }}
+      build-macos: ${{ steps.filter.outputs.all || steps.filter.outputs.build-all || steps.filter.outputs.build-macos }}
+      build-web: ${{ steps.filter.outputs.all || steps.filter.outputs.build-all || steps.filter.outputs.build-web }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Check for changes
+        id: filter
+        uses: dorny/paths-filter@v2
+        with:
+          filters: |
+            all:
+              - .github/workflows/check.yml
+            analyze:
+              - "**.dart"
+              - analysis_options.yaml
+            build-all:
+              - pubspec.lock
+              - pubspec.yaml
+            build-android:
+              - android/**
+            build-ios:
+              - ios/**
+            build-macos:
+              - macos/**
+            build-web:
+              - web/**
+
+  # Analyze
+  analyze:
+    name: Analyze
+    needs: changes
+    if: ${{ needs.changes.outputs.analyze == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install flutter
+        uses: subosito/flutter-action@v1
+      - name: Run flutter doctor
+        run: flutter doctor -v
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Analyze code
+        run: flutter analyze
+      - name: Check code formatting
+        run: find . -name '*.dart' -not -name '*.g.dart' -not -name '*.gr.dart' -exec flutter format --set-exit-if-changed --dry-run --line-length=100 {} \;
+
+  # Build for Android
+  build-android:
+    name: Build Android
+    needs: changes
+    if: ${{ needs.changes.outputs.build-android == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        flavor: [--debug, --profile, --release]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install flutter
+        uses: subosito/flutter-action@v1
+      - name: Run flutter doctor
+        run: flutter doctor -v
+      - name: Set up keystore
+        run: echo '${{ secrets.ANDROID_STORE }}' | base64 --decode > key.jks
+      - name: Build
+        run: flutter build appbundle ${{ matrix.flavor }}
+        env:
+          ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_STORE_FILE: key.jks
+
+  # Build for iOS
+  build-ios:
+    name: Build iOS
+    needs: changes
+    if: ${{ needs.changes.outputs.build-ios == 'true' }}
+    runs-on: macos-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        flavor: [--debug, --profile, --release]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install flutter
+        uses: subosito/flutter-action@v1
+      - name: Run flutter doctor
+        run: flutter doctor -v
+      - name: Build
+        run: flutter build ios ${{ matrix.flavor }} --no-codesign
+
+  # Build for macOS
+  build-macos:
+    name: Build macOS
+    needs: changes
+    # TODO: Reenable after figuring out how to disable codesign
+    if: "false"
+    # if: ${{ needs.changes.outputs.build-macos == 'true' }}
+    runs-on: macos-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        flavor: [--debug, --profile, --release]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install flutter
+        uses: subosito/flutter-action@v1
+      - name: Run flutter doctor
+        run: |
+          flutter config --enable-macos-desktop
+          flutter doctor -v
+      - name: Build
+        run: flutter build macos ${{ matrix.flavor }}
+
+  # Build for web
+  build-web:
+    name: Build Web
+    needs: changes
+    if: ${{ needs.changes.outputs.build-web == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        flavor: [--profile, --release]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install flutter
+        uses: subosito/flutter-action@v1
+      - name: Run flutter doctor
+        run: flutter doctor -v
+      - name: Build
+        run: flutter build web ${{ matrix.flavor }}

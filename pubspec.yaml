@@ -17,6 +17,8 @@ dev_dependencies:
   flutter_native_splash: ^1.0.0
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
 
 flutter:
   uses-material-design: true
