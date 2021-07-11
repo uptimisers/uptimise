@@ -88,7 +88,7 @@ jobs:
       - name: Run flutter doctor
         run: flutter doctor -v
       - name: Set up keystore
-        run: echo '${{ secrets.ANDROID_STORE }}' > android/app/key.jks
+        run: echo '${{ secrets.ANDROID_STORE }}' | base64 --decode > android/app/key.jks
       - name: Build
         run: flutter build appbundle ${{ matrix.flavor }}
         env:
