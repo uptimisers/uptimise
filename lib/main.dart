@@ -53,8 +53,7 @@ Future<void> setupAndRunApp(ProviderContainer container) async {
   log.firebaseAppInitializationCompleter.complete(); // allows crashlytics reporting to continue
 
   // SharedPreferences
-  container.read(prefsProvider); // trigger initialisation
-  await prefsInitCompleter.future; // wait for initialisation to complete
+  await container.read(prefsProvider.future); // trigger initialisation
 
   // Analytics
   final prefs = container.read(prefsProvider).data!.value;
