@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "flutter run",
+            "request": "launch",
+            "type": "dart",
+        },
+        {
+            "name": "flutter run -d chrome",
+            "request": "launch",
+            "type": "dart",
+            "args": ["-d", "chrome", "--web-port", "5000"],
+        },
+        {
+            "name": "flutter run --profile",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter run --release",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
