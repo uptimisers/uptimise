@@ -62,6 +62,7 @@ class FirebaseAnalyticsService with LoggerMixin implements AnalyticsService {
 
   @override
   void logEvent({required String name, Map<String, Object?>? parameters}) {
+    log.d('A $name event was logged with parameters $parameters.');
     unawaited(analytics.logEvent(name: name, parameters: parameters));
   }
 }

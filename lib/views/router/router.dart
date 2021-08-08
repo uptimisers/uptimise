@@ -1,16 +1,24 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../services/auth_service.dart';
 import '../home/home_page.dart';
 import '../not_found/not_found_page.dart';
+import '../sign_in/sign_in_page.dart';
 import 'router.gr.dart';
 
-@MaterialAutoRouter(
+@AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: [
     AutoRoute<void>(
       path: '/',
       page: HomePage,
+      guards: [AuthGuard],
+    ),
+    AutoRoute<void>(
+      path: '/signin',
+      page: SignInPage,
+      guards: [AlreadyAuthedGuard],
     ),
     AutoRoute<void>(
       path: '*',
@@ -20,4 +28,44 @@ import 'router.gr.dart';
 )
 class $AppRouter {}
 
-final routerProvider = Provider((ref) => AppRouter());
+class AuthGuard extends AutoRouteGuard {
+  AuthGuard(this.ref);
+
+  final ProviderRef ref;
+
+  @override
+  Future<void> onNavigation(NavigationResolver resolver, StackRouter router) async {
+    final isSignedIn = ref.read(authProvider).user != null;
+
+    if (isSignedIn) {
+      resolver.next();
+    } else {
+      await router.push(const SignInRoute());
+      resolver.next(false);
+    }
+  }
+}
+
+class AlreadyAuthedGuard extends AutoRouteGuard {
+  AlreadyAuthedGuard(this.ref);
+
+  final ProviderRef ref;
+
+  @override
+  Future<void> onNavigation(NavigationResolver resolver, StackRouter router) async {
+    final isSignedIn = ref.read(authProvider).user != null;
+
+    if (!isSignedIn) {
+      resolver.next();
+    } else {
+      final path = router.current.queryParams.get('to', '/') as String;
+      await router.pushNamed(path);
+      resolver.next(false);
+    }
+  }
+}
+
+final routerProvider = Provider((ref) => AppRouter(
+      authGuard: AuthGuard(ref),
+      alreadyAuthedGuard: AlreadyAuthedGuard(ref),
+    ));

@@ -1,39 +1,54 @@
 {
-  "project_info":{
-    "project_number":"899769789811",
-    "project_id":"uptimise-app",
-    "storage_bucket":"uptimise-app.appspot.com"
+  "project_info": {
+    "project_number": "899769789811",
+    "project_id": "uptimise-app",
+    "storage_bucket": "uptimise-app.appspot.com"
   },
-  "client":[
+  "client": [
     {
-      "client_info":{
-        "mobilesdk_app_id":"1:899769789811:android:75435cfd876b0673bfe906",
-        "android_client_info":{
-          "package_name":"com.uptimisers.uptimise.debug"
+      "client_info": {
+        "mobilesdk_app_id": "1:899769789811:android:75435cfd876b0673bfe906",
+        "android_client_info": {
+          "package_name": "com.uptimisers.uptimise.debug"
         }
       },
-      "oauth_client":[
+      "oauth_client": [
         {
-          "client_id":"899769789811-f0msiepnfvfg61vn880fegn8k5bah3l0.apps.googleusercontent.com",
-          "client_type":3
+          "client_id": "899769789811-lmm9s8pn1j9t2lk56sp41n6ehhbunitr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.uptimisers.uptimise",
+            "certificate_hash": "f7dc3c02e3fe916df7c9e98fa22ced4d44ce8b6e"
+          }
+        },
+        {
+          "client_id": "899769789811-f0msiepnfvfg61vn880fegn8k5bah3l0.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
-      "api_key":[
+      "api_key": [
         {
-          "current_key":"AIzaSyDTceO2dRZfftls5k4SbFZq4E-wv9MJTKc"
+          "current_key": "AIzaSyDTceO2dRZfftls5k4SbFZq4E-wv9MJTKc"
         }
       ],
-      "services":{
-        "appinvite_service":{
-          "other_platform_oauth_client":[
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
             {
-              "client_id":"899769789811-f0msiepnfvfg61vn880fegn8k5bah3l0.apps.googleusercontent.com",
-              "client_type":3
+              "client_id": "899769789811-f0msiepnfvfg61vn880fegn8k5bah3l0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "899769789811-5t8pigf0ig5g2ipc2j6jkiet00g8mpc7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.uptimisers.uptimise"
+              }
             }
           ]
         }
       }
     }
   ],
-  "configuration_version":"1"
+  "configuration_version": "1"
 }

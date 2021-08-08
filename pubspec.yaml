@@ -11,22 +11,26 @@ environment:
 dependencies: # Unsupported OS(s) listed in comments
   auto_route: ^2.0.0
   firebase_analytics: ^8.0.0 # macos
+  firebase_auth: ^3.0.0
   firebase_core: ^1.0.0
   firebase_crashlytics: ^2.0.0 # web
   flutter:
     sdk: flutter
   flutter_hooks: 0.18.0
   flutter_keyboard_visibility: ^5.0.0 # macos
-  hooks_riverpod: ^1.0.0-dev.5
+  google_sign_in: ^5.0.0 # macos # TODO: figure out what to do for macos
+  hooks_riverpod: ^1.0.0-dev.6
   logger: ^1.0.0
   responsive_builder: 0.4.1
   shared_preferences: ^2.0.0
   url_strategy: 0.2.0
+  uuid: ^3.0.0
+  # TODO: consider using https://pub.dev/packages/bitsdojo_window
 
 dev_dependencies:
   auto_route_generator: ^2.0.0
   build_runner: ^2.0.0
-  flutter_launcher_icons: 0.9.0
+  flutter_launcher_icons: 0.9.1
   flutter_native_splash: ^1.0.0
   flutter_test:
     sdk: flutter
@@ -36,6 +40,13 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+  fonts:
+    - family: NotoMono
+      fonts:
+        - asset: assets/fonts/NotoMono-Regular.ttf
+          weight: 400
 
 flutter_icons:
   android: true

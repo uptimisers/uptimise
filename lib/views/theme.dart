@@ -122,7 +122,7 @@ class AppTheme {
             headline6: TextStyle(
               color: primary,
               fontSize: 20,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w700,
             ),
           ),
         ),
@@ -133,11 +133,11 @@ class AppTheme {
         textTheme: TextTheme(
           headline1: TextStyle(color: foreground),
           headline2: TextStyle(color: foreground),
-          headline3: TextStyle(
+          headline3: TextStyle(color: foreground),
+          headline4: TextStyle(
             color: foreground,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w600, // used for "Start Uptimising" text
           ),
-          headline4: TextStyle(color: foreground),
           headline5: TextStyle(color: foreground),
           headline6: TextStyle(color: foreground),
           subtitle1: TextStyle(color: foreground),
@@ -146,8 +146,8 @@ class AppTheme {
           bodyText2: TextStyle(color: foregroundAccented),
           button: TextStyle(
             color: foreground,
-            fontWeight: FontWeight.w500,
-            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            fontSize: 19,
           ),
           caption: TextStyle(color: foreground),
           overline: TextStyle(

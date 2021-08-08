@@ -31,12 +31,21 @@ To run Uptimise, your device must be capable of running at least one of
 - macOS 10.12 (Sierra), or
 - most modern web browsers.
 
+## Running
+
+```bash
+flutter run # Runs the app in development mode
+
+# To run on web, you need to specify the port as 5000 for Google sign in to work
+flutter run -d chrome --web-hostname localhost --web-port 5000
+```
+
 ## Code / Asset Generation
 
 ```bash
 # For autoroute
-flutter packages pub run build_runner build; # Generates once
-flutter packages pub run build_runner watch; # Generates upon file change
+flutter packages pub run build_runner build --delete-conflicting-outputs; # Generates once
+flutter packages pub run build_runner watch --delete-conflicting-outputs; # Generates upon file change
 
 # For app icon (iOS and Android only)
 flutter pub run flutter_launcher_icons:main; # Generates app icons
