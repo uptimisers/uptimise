@@ -31,7 +31,7 @@ def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-} else {
+} else if (System.getenv('ANDROID_STORE_PASSWORD') != null) {
     keystoreProperties.setProperty('storePassword', System.getenv('ANDROID_STORE_PASSWORD'));
     keystoreProperties.setProperty('keyPassword', System.getenv('ANDROID_KEY_PASSWORD'));
     keystoreProperties.setProperty('keyAlias', System.getenv('ANDROID_KEY_ALIAS'));
@@ -75,7 +75,11 @@ android {
 
         release {
             manifestPlaceholders = [ applicationLabel: "Uptimise"]
-            signingConfig signingConfigs.release
+            if (keystoreProperties.containsKey('storePassword')) {
+                signingConfig signingConfigs.release
+            } else {
+                signingConfig signingConfigs.debug
+            }
         }
     }
 }
