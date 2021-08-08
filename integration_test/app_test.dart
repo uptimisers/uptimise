@@ -6,11 +6,11 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('App', () {
-    testWidgets('HomePage is rendered', (tester) async {
+    testWidgets('SignInPage is rendered', (tester) async {
       await app.main();
       await tester.pumpAndSettle();
 
-      expect(find.text('Home'), findsOneWidget);
+      expect(find.text('Start Uptimising'), findsOneWidget);
     });
   });
 }
