@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "899769789811-cd8n6l4s28kfhcfl127d4lqsef7h7m3a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.uptimisers.uptimise",
+            "certificate_hash": "1feb96519870a4e76d936c465d5e066e85f5c211"
+          }
+        },
+        {
           "client_id": "899769789811-lmm9s8pn1j9t2lk56sp41n6ehhbunitr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
