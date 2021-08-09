@@ -88,6 +88,6 @@ class AppLogger {
 
   Future<void> setUserId({String? id}) async {
     await firebaseAppInitializationCompleter.future;
-    _crashlytics.setUserId(id: id);
+    await _crashlytics.setUserId(id: id);
   }
 }

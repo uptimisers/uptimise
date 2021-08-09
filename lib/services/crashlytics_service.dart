@@ -19,7 +19,7 @@ class DummyCrashlyticsService implements CrashlyticsService {
 }
 
 class FirebaseCrashlyticsService implements CrashlyticsService {
-  get crashlytics => FirebaseCrashlytics.instance;
+  FirebaseCrashlytics get crashlytics => FirebaseCrashlytics.instance;
 
   @override
   Future<void> setUserId({String? id}) async {
