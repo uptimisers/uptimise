@@ -56,6 +56,50 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899769789811:android:cacece7e84dd4111bfe906",
+        "android_client_info": {
+          "package_name": "com.uptimisers.uptimise.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "899769789811-b1k8p40hm65782qdqihph3654oqkop8c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.uptimisers.uptimise.debug",
+            "certificate_hash": "1feb96519870a4e76d936c465d5e066e85f5c211"
+          }
+        },
+        {
+          "client_id": "899769789811-f0msiepnfvfg61vn880fegn8k5bah3l0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTceO2dRZfftls5k4SbFZq4E-wv9MJTKc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "899769789811-f0msiepnfvfg61vn880fegn8k5bah3l0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "899769789811-5t8pigf0ig5g2ipc2j6jkiet00g8mpc7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.uptimisers.uptimise"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

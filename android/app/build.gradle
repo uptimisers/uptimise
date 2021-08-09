@@ -80,7 +80,7 @@ android {
 
         profile {
             manifestPlaceholders = [ applicationLabel: "Uptimise (profile)"]
-            applicationIdSuffix ".profile"
+            applicationIdSuffix ".debug"
             signingConfig signingConfigs.debug
         }
 
