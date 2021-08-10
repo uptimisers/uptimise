@@ -10,6 +10,7 @@ environment:
 
 dependencies: # Unsupported OS(s) listed in comments
   auto_route: ^2.0.0
+  extension_google_sign_in_as_googleapis_auth: ^2.0.2
   firebase_analytics: ^8.0.0 # macos
   firebase_auth: ^3.0.0
   firebase_core: ^1.0.0
@@ -19,6 +20,7 @@ dependencies: # Unsupported OS(s) listed in comments
   flutter_hooks: 0.18.0
   flutter_keyboard_visibility: ^5.0.0 # macos
   google_sign_in: ^5.0.0 # macos # TODO: figure out what to do for macos
+  googleapis: ^4.0.0
   hooks_riverpod: ^1.0.0-dev.6
   logger: ^1.0.0
   responsive_builder: 0.4.1
