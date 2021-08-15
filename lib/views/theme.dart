@@ -169,6 +169,12 @@ class AppTheme {
         fontSize: 11,
         fontFeatures: const [FontFeature.tabularFigures()],
       );
+
+  TextStyle get finePrintTextStyle => TextStyle(
+        color: foregroundAccented,
+        fontWeight: FontWeight.w300,
+        fontSize: 13,
+      );
 }
 
 const lightTheme = AppTheme(

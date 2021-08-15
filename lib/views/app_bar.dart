@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../services/auth_service.dart';
 import 'home/menu.dart';
 import 'router/router.dart';
-import 'router/router.gr.dart';
 
 class AppAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const AppAppBar({Key? key, required this.title, required this.showProfile}) : super(key: key);

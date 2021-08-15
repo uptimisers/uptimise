@@ -13,6 +13,9 @@ Future<void> showHomeMenu(BuildContext context) async {
       final router = ref.watch(routerProvider);
 
       return SimpleDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
         title: Center(
           child: Text(
             'Uptimise',
@@ -64,8 +67,35 @@ Future<void> showHomeMenu(BuildContext context) async {
             title: const Text('Help and feedback'),
             onTap: () {
               Navigator.of(context).pop();
-              // TOOD: open help & feedback url
+              // TODO: open help & feedback url
             },
+          ),
+          const Divider(),
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    // TODO: open privacy policy url
+                  },
+                  child: Text(
+                    'Privacy Policy',
+                    style: theme.finePrintTextStyle,
+                  ),
+                ),
+                const Text('·'),
+                TextButton(
+                  onPressed: () {
+                    // TODO: open terms of service url
+                  },
+                  child: Text(
+                    'Terms of Service',
+                    style: theme.finePrintTextStyle,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       );
