@@ -11,7 +11,6 @@ import 'bottom_app_bar.dart';
 import 'calendar/calendar_page.dart';
 import 'dashboard/dashboard_page.dart';
 import 'tasks/tasks_page.dart';
-import 'tools/tools_page.dart';
 
 mixin HomeTabPage {
   String get title;
@@ -30,7 +29,6 @@ class HomePage extends ConsumerWidget {
         DashboardRoute(),
         TasksRoute(),
         CalendarRoute(),
-        ToolsRoute(),
       ],
       builder: (context, child, animation) {
         final tabsRouter = AutoTabsRouter.of(context);
@@ -40,7 +38,6 @@ class HomePage extends ConsumerWidget {
               const DashboardPage().title,
               const TasksPage().title,
               const CalendarPage().title,
-              const ToolsPage().title
             ][tabsRouter.activeIndex],
             showProfile: true,
           ),
@@ -75,7 +72,7 @@ class HomePage extends ConsumerWidget {
               ),
             ],
           ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
           // Custom BottomAppBar used instead of BottomNavigationBar for FAB
           bottomNavigationBar: const HomeBottomAppBar(),
           body: PageTransitionSwitcher(

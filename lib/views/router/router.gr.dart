@@ -10,7 +10,6 @@ import 'package:uptimise/views/home/calendar/calendar_page.dart' as _i11;
 import 'package:uptimise/views/home/dashboard/dashboard_page.dart' as _i9;
 import 'package:uptimise/views/home/home_page.dart' as _i4;
 import 'package:uptimise/views/home/tasks/tasks_page.dart' as _i10;
-import 'package:uptimise/views/home/tools/tools_page.dart' as _i12;
 import 'package:uptimise/views/not_found/not_found_page.dart' as _i8;
 import 'package:uptimise/views/profile/profile_page.dart' as _i5;
 import 'package:uptimise/views/router/router.dart' as _i3;
@@ -69,11 +68,6 @@ class AppRouter extends _i1.RootStackRouter {
         routeData: routeData,
         builder: (_) {
           return const _i11.CalendarPage();
-        }),
-    ToolsRoute.name: (routeData) => _i1.AdaptivePage<void>(
-        routeData: routeData,
-        builder: (_) {
-          return const _i12.ToolsPage();
         })
   };
 
@@ -84,8 +78,7 @@ class AppRouter extends _i1.RootStackRouter {
         ], children: [
           _i1.RouteConfig(DashboardRoute.name, path: 'dashboard'),
           _i1.RouteConfig(TasksRoute.name, path: 'tasks'),
-          _i1.RouteConfig(CalendarRoute.name, path: 'calendar'),
-          _i1.RouteConfig(ToolsRoute.name, path: 'tools')
+          _i1.RouteConfig(CalendarRoute.name, path: 'calendar')
         ]),
         _i1.RouteConfig(ProfileRoute.name,
             path: '/profile', guards: [authGuard]),
@@ -144,10 +137,4 @@ class CalendarRoute extends _i1.PageRouteInfo {
   const CalendarRoute() : super(name, path: 'calendar');
 
   static const String name = 'CalendarRoute';
-}
-
-class ToolsRoute extends _i1.PageRouteInfo {
-  const ToolsRoute() : super(name, path: 'tools');
-
-  static const String name = 'ToolsRoute';
 }

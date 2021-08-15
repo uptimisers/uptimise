@@ -6,7 +6,6 @@ import '../home/calendar/calendar_page.dart';
 import '../home/dashboard/dashboard_page.dart';
 import '../home/home_page.dart';
 import '../home/tasks/tasks_page.dart';
-import '../home/tools/tools_page.dart';
 import '../not_found/not_found_page.dart';
 import '../profile/profile_page.dart';
 import '../settings/settings_page.dart';
@@ -32,10 +31,6 @@ import 'router.gr.dart';
         AutoRoute<void>(
           path: 'calendar',
           page: CalendarPage,
-        ),
-        AutoRoute<void>(
-          path: 'tools',
-          page: ToolsPage,
         ),
       ],
     ),
