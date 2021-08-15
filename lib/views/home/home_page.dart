@@ -23,7 +23,7 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.read(themeProvider);
+    final theme = ref.watch(themeProvider);
 
     return AutoTabsRouter(
       routes: const [

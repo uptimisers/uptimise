@@ -15,9 +15,9 @@ class SignInPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final log = ref.read(loggerProvider);
-    final router = ref.read(routerProvider);
-    final auth = ref.read(authProvider);
+    final log = ref.watch(loggerProvider);
+    final router = ref.watch(routerProvider);
+    final auth = ref.watch(authProvider);
 
     Future<void> signIn() async {
       try {

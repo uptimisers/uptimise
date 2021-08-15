@@ -19,7 +19,7 @@ class AppAppBar extends ConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider);
-    final router = ref.read(routerProvider);
+    final router = ref.watch(routerProvider);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),

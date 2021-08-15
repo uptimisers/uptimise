@@ -15,7 +15,7 @@ class HomeBottomAppBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tabsRouter = AutoTabsRouter.of(context);
-    final theme = ref.read(themeProvider);
+    final theme = ref.watch(themeProvider);
 
     Widget toTabItem(int index, HomeTabPage tabPage) {
       return IconButton(

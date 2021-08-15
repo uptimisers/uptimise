@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../services/prefs_service.dart';
 
 final themeModeProvider = StateProvider<ThemeMode>((ref) {
-  final prefs = ref.read(prefsProvider).data!.value;
+  final prefs = ref.watch(prefsProvider).data!.value;
   final themeModeIndex = prefs.getInt(kThemeMode) ?? ThemeMode.system.index;
   return ThemeMode.values[themeModeIndex];
 });
