@@ -24,7 +24,7 @@ class TasksPage extends HookConsumerWidget with HomeTabPage {
           data: (incompleteTasks) => incompleteTasks.value!.isEmpty
               ? Center(
                   child: Text(
-                    'Yay, you cleared all your tasks!',
+                    'Congratulations, you cleared all your tasks!',
                     style: Theme.of(context).textTheme.headline6,
                   ),
                 )

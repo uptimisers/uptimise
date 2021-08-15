@@ -7,6 +7,7 @@ import 'package:jiffy/jiffy.dart';
 
 import '../../models/task.dart';
 import '../app_bar.dart';
+import '../router/router.dart';
 import '../router/router.gr.dart';
 import '../theme.dart';
 import 'bottom_app_bar.dart';
@@ -25,6 +26,7 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(themeProvider);
+    final router = ref.watch(routerProvider);
 
     return AutoTabsRouter(
       routes: const [
@@ -51,24 +53,21 @@ class HomePage extends ConsumerWidget {
               SpeedDialChild(
                 label: 'Start session',
                 labelStyle: Theme.of(context).textTheme.bodyText1,
-                onTap: () {
-                  // TODO: show start session dialog
-                },
+                onTap: () => router.push(const StartSessionRoute()),
                 child: Icon(Icons.av_timer_rounded, color: theme.primary),
               ),
               SpeedDialChild(
                 label: 'Import task',
                 labelStyle: Theme.of(context).textTheme.bodyText1,
-                onTap: () {
-                  // TODO: show import task dialog
-                },
+                onTap: () => router.push(const ImportTaskRoute()),
                 child: Icon(Icons.cloud_upload_rounded, color: theme.primary),
               ),
               SpeedDialChild(
                 label: 'Create task',
                 labelStyle: Theme.of(context).textTheme.bodyText1,
                 onTap: () {
-                  // TODO: show create task dialog
+                  // TODO: Uncomment router.push and remove Task.create
+                  // router.push(const CreateTaskRoute());
                   Task.create(
                     ref,
                     title: 'Temporary Placeholder',
