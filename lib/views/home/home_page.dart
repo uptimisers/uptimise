@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
@@ -18,11 +19,19 @@ class HomePage extends StatelessWidget {
       ],
       builder: (context, child, animation) {
         final tabsRouter = AutoTabsRouter.of(context);
-
         return Scaffold(
-          body: FadeTransition(
-            opacity: animation,
-            child: child,
+          body: PageTransitionSwitcher(
+            transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
+              return FadeThroughTransition(
+                animation: primaryAnimation,
+                secondaryAnimation: secondaryAnimation,
+                child: child,
+              );
+            },
+            child: Container(
+              key: ValueKey(tabsRouter.activeIndex),
+              child: child,
+            ),
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
@@ -31,6 +40,7 @@ class HomePage extends StatelessWidget {
             child: const Icon(Icons.add_rounded),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          // Custom BottomAppBar used instead of BottomNavigationBar for FAB
           bottomNavigationBar: AppBottomAppBar(tabsRouter: tabsRouter),
         );
       },
