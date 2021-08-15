@@ -24,6 +24,13 @@ class HomePage extends StatelessWidget {
             opacity: animation,
             child: child,
           ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              // TODO
+            },
+            child: const Icon(Icons.add_rounded),
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: AppBottomAppBar(tabsRouter: tabsRouter),
         );
       },

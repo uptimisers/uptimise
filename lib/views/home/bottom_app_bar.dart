@@ -45,8 +45,8 @@ class AppBottomAppBar extends ConsumerWidget {
       color: theme.backgroundAccented,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),
-        child: Wrap(
-          alignment: WrapAlignment.spaceAround,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ...tabItems.map(
               (tabItem) {
