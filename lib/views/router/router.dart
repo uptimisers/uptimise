@@ -9,6 +9,7 @@ import '../home/tasks/tasks_page.dart';
 import '../home/tools/tools_page.dart';
 import '../not_found/not_found_page.dart';
 import '../profile/profile_page.dart';
+import '../settings/settings_page.dart';
 import '../sign_in/sign_in_page.dart';
 import 'router.gr.dart';
 
@@ -41,6 +42,11 @@ import 'router.gr.dart';
     AutoRoute<void>(
       path: '/profile',
       page: ProfilePage,
+      guards: [AuthGuard],
+    ),
+    AutoRoute<void>(
+      path: '/settings',
+      page: SettingsPage,
       guards: [AuthGuard],
     ),
     AutoRoute<void>(

@@ -6,15 +6,16 @@
 
 import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
-import 'package:uptimise/views/home/calendar/calendar_page.dart' as _i10;
-import 'package:uptimise/views/home/dashboard/dashboard_page.dart' as _i8;
+import 'package:uptimise/views/home/calendar/calendar_page.dart' as _i11;
+import 'package:uptimise/views/home/dashboard/dashboard_page.dart' as _i9;
 import 'package:uptimise/views/home/home_page.dart' as _i4;
-import 'package:uptimise/views/home/tasks/tasks_page.dart' as _i9;
-import 'package:uptimise/views/home/tools/tools_page.dart' as _i11;
-import 'package:uptimise/views/not_found/not_found_page.dart' as _i7;
+import 'package:uptimise/views/home/tasks/tasks_page.dart' as _i10;
+import 'package:uptimise/views/home/tools/tools_page.dart' as _i12;
+import 'package:uptimise/views/not_found/not_found_page.dart' as _i8;
 import 'package:uptimise/views/profile/profile_page.dart' as _i5;
 import 'package:uptimise/views/router/router.dart' as _i3;
-import 'package:uptimise/views/sign_in/sign_in_page.dart' as _i6;
+import 'package:uptimise/views/settings/settings_page.dart' as _i6;
+import 'package:uptimise/views/sign_in/sign_in_page.dart' as _i7;
 
 class AppRouter extends _i1.RootStackRouter {
   AppRouter(
@@ -39,35 +40,40 @@ class AppRouter extends _i1.RootStackRouter {
         builder: (_) {
           return const _i5.ProfilePage();
         }),
+    SettingsRoute.name: (routeData) => _i1.AdaptivePage<void>(
+        routeData: routeData,
+        builder: (_) {
+          return const _i6.SettingsPage();
+        }),
     SignInRoute.name: (routeData) => _i1.AdaptivePage<void>(
         routeData: routeData,
         builder: (_) {
-          return const _i6.SignInPage();
+          return const _i7.SignInPage();
         }),
     NotFoundRoute.name: (routeData) => _i1.AdaptivePage<void>(
         routeData: routeData,
         builder: (_) {
-          return const _i7.NotFoundPage();
+          return const _i8.NotFoundPage();
         }),
     DashboardRoute.name: (routeData) => _i1.AdaptivePage<void>(
         routeData: routeData,
         builder: (_) {
-          return const _i8.DashboardPage();
+          return const _i9.DashboardPage();
         }),
     TasksRoute.name: (routeData) => _i1.AdaptivePage<void>(
         routeData: routeData,
         builder: (_) {
-          return const _i9.TasksPage();
+          return const _i10.TasksPage();
         }),
     CalendarRoute.name: (routeData) => _i1.AdaptivePage<void>(
         routeData: routeData,
         builder: (_) {
-          return const _i10.CalendarPage();
+          return const _i11.CalendarPage();
         }),
     ToolsRoute.name: (routeData) => _i1.AdaptivePage<void>(
         routeData: routeData,
         builder: (_) {
-          return const _i11.ToolsPage();
+          return const _i12.ToolsPage();
         })
   };
 
@@ -83,6 +89,8 @@ class AppRouter extends _i1.RootStackRouter {
         ]),
         _i1.RouteConfig(ProfileRoute.name,
             path: '/profile', guards: [authGuard]),
+        _i1.RouteConfig(SettingsRoute.name,
+            path: '/settings', guards: [authGuard]),
         _i1.RouteConfig(SignInRoute.name,
             path: '/signin', guards: [alreadyAuthedGuard]),
         _i1.RouteConfig(NotFoundRoute.name, path: '*')
@@ -100,6 +108,12 @@ class ProfileRoute extends _i1.PageRouteInfo {
   const ProfileRoute() : super(name, path: '/profile');
 
   static const String name = 'ProfileRoute';
+}
+
+class SettingsRoute extends _i1.PageRouteInfo {
+  const SettingsRoute() : super(name, path: '/settings');
+
+  static const String name = 'SettingsRoute';
 }
 
 class SignInRoute extends _i1.PageRouteInfo {

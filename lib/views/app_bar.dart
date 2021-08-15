@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../services/auth_service.dart';
+import 'home/menu.dart';
 import 'router/router.dart';
 import 'router/router.gr.dart';
 
@@ -48,9 +49,7 @@ class AppAppBar extends ConsumerWidget implements PreferredSizeWidget {
                     child: Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        onTap: () {
-                          router.push(const ProfileRoute());
-                        },
+                        onTap: () => showHomeMenu(context),
                       ),
                     ),
                   ),

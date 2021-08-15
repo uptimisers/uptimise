@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../services/auth_service.dart';
 import '../../services/log_service.dart';
-import '../dialog.dart';
+import '../alerts.dart';
 import '../router/router.dart';
 
 class SignInPage extends HookConsumerWidget {
