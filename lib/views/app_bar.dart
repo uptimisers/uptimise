@@ -18,7 +18,7 @@ class AppAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final auth = ref.read(authProvider);
+    final user = ref.watch(userProvider);
     final router = ref.read(routerProvider);
 
     return Padding(
@@ -33,7 +33,7 @@ class AppAppBar extends ConsumerWidget implements PreferredSizeWidget {
               )
             : null,
         actions: [
-          if (showProfile)
+          if (showProfile && user.data?.value != null)
             Center(
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -43,7 +43,7 @@ class AppAppBar extends ConsumerWidget implements PreferredSizeWidget {
                   clipBehavior: Clip.hardEdge,
                   color: Colors.transparent,
                   child: CircleAvatar(
-                    backgroundImage: NetworkImage(auth.user!.photoURL!),
+                    backgroundImage: NetworkImage(user.data!.value!.photoURL!),
                     radius: 28,
                     child: Material(
                       color: Colors.transparent,

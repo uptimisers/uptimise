@@ -63,9 +63,8 @@ class AuthGuard extends AutoRouteGuard {
 
   @override
   Future<void> onNavigation(NavigationResolver resolver, StackRouter router) async {
-    final isSignedIn = ref.read(authProvider).user != null;
-
-    if (isSignedIn) {
+    final auth = ref.read(authProvider);
+    if (auth.isSignedIn) {
       resolver.next();
     } else {
       await router.push(const SignInRoute());
@@ -81,9 +80,8 @@ class AlreadyAuthedGuard extends AutoRouteGuard {
 
   @override
   Future<void> onNavigation(NavigationResolver resolver, StackRouter router) async {
-    final isSignedIn = ref.read(authProvider).user != null;
-
-    if (!isSignedIn) {
+    final auth = ref.read(authProvider);
+    if (!auth.isSignedIn) {
       resolver.next();
     } else {
       final path = router.current.queryParams.get('to', '/') as String;

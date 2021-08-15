@@ -11,6 +11,7 @@ environment:
 dependencies: # Unsupported OS(s) listed in comments
   animations: ^2.0.0
   auto_route: ^2.0.0
+  cloud_firestore: ^2.0.0
   firebase_analytics: ^8.0.0 # macos
   firebase_auth: ^3.0.0
   firebase_core: ^1.0.0

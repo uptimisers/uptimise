@@ -33,7 +33,8 @@ class SignInPage extends HookConsumerWidget {
         return;
       }
 
-      log.i('${auth.user!.displayName} (${auth.user!.email}) signed in');
+      final user = ref.read(userProvider).data!.value!;
+      log.i('${user.displayName} (${user.email}) signed in');
       final path = router.current.queryParams.get('to', '/') as String;
       await router.replaceNamed(path);
     }
