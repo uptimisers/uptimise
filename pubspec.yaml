@@ -20,6 +20,7 @@ dependencies: # Unsupported OS(s) listed in comments
     sdk: flutter
   flutter_hooks: 0.18.0
   flutter_keyboard_visibility: ^5.0.0 # macos
+  flutter_speed_dial: ^4.0.0
   google_sign_in: ^5.0.0 # macos # TODO: figure out what to do for macos
   hooks_riverpod: ^1.0.0-dev.6
   logger: ^1.0.0

@@ -1,9 +1,12 @@
 import 'package:animations/animations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../app_bar.dart';
 import '../router/router.gr.dart';
+import '../theme.dart';
 import 'bottom_app_bar.dart';
 import 'calendar/calendar_page.dart';
 import 'dashboard/dashboard_page.dart';
@@ -15,11 +18,13 @@ mixin HomeTabPage {
   IconData get iconData;
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = ref.read(themeProvider);
+
     return AutoTabsRouter(
       routes: const [
         DashboardRoute(),
@@ -39,11 +44,36 @@ class HomePage extends StatelessWidget {
             ][tabsRouter.activeIndex],
             showProfile: true,
           ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              // TODO: route to/show dialog
-            },
-            child: const Icon(Icons.add_rounded),
+          floatingActionButton: SpeedDial(
+            icon: Icons.add_rounded,
+            activeIcon: Icons.close_rounded,
+            spacing: 16,
+            children: [
+              SpeedDialChild(
+                label: 'Start session',
+                labelStyle: Theme.of(context).textTheme.bodyText1,
+                onTap: () {
+                  // TODO: show start session dialog
+                },
+                child: Icon(Icons.av_timer_rounded, color: theme.primary),
+              ),
+              SpeedDialChild(
+                label: 'Import task',
+                labelStyle: Theme.of(context).textTheme.bodyText1,
+                onTap: () {
+                  // TODO: show import task dialog
+                },
+                child: Icon(Icons.cloud_upload_rounded, color: theme.primary),
+              ),
+              SpeedDialChild(
+                label: 'Create task',
+                labelStyle: Theme.of(context).textTheme.bodyText1,
+                onTap: () {
+                  // TODO: show create task dialog
+                },
+                child: Icon(Icons.task_rounded, color: theme.primary),
+              ),
+            ],
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           // Custom BottomAppBar used instead of BottomNavigationBar for FAB
