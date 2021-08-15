@@ -2,8 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../services/auth_service.dart';
+import '../home/calendar/calendar_page.dart';
+import '../home/dashboard/dashboard_page.dart';
 import '../home/home_page.dart';
+import '../home/tasks/tasks_page.dart';
+import '../home/tools/tools_page.dart';
 import '../not_found/not_found_page.dart';
+import '../profile/profile_page.dart';
 import '../sign_in/sign_in_page.dart';
 import 'router.gr.dart';
 
@@ -13,6 +18,29 @@ import 'router.gr.dart';
     AutoRoute<void>(
       path: '/',
       page: HomePage,
+      guards: [AuthGuard],
+      children: [
+        AutoRoute<void>(
+          path: 'dashboard',
+          page: DashboardPage,
+        ),
+        AutoRoute<void>(
+          path: 'tasks',
+          page: TasksPage,
+        ),
+        AutoRoute<void>(
+          path: 'calendar',
+          page: CalendarPage,
+        ),
+        AutoRoute<void>(
+          path: 'tools',
+          page: ToolsPage,
+        ),
+      ],
+    ),
+    AutoRoute<void>(
+      path: '/profile',
+      page: ProfilePage,
       guards: [AuthGuard],
     ),
     AutoRoute<void>(
