@@ -116,15 +116,17 @@ class AppTheme {
         iconTheme: IconThemeData(color: foregroundAccented),
         appBarTheme: AppBarTheme(
           brightness: Brightness.light,
+          elevation: 0,
           color: backgroundAccented,
-          iconTheme: IconThemeData(color: primary),
+          iconTheme: IconThemeData(color: foreground),
           textTheme: TextTheme(
             headline6: TextStyle(
-              color: primary,
-              fontSize: 20,
+              color: foreground,
+              fontSize: 32,
               fontWeight: FontWeight.w700,
             ),
           ),
+          centerTitle: false,
         ),
         snackBarTheme: SnackBarThemeData(
           backgroundColor: foregroundAccented,

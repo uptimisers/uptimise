@@ -3,42 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../theme.dart';
+import 'calendar/calendar_page.dart';
+import 'dashboard/dashboard_page.dart';
+import 'home_page.dart';
+import 'tasks/tasks_page.dart';
+import 'tools/tools_page.dart';
 
-class TabItem {
-  const TabItem({
-    required this.index,
-    required this.title,
-    required this.icon,
-  }) : isSpacer = false;
-
-  const TabItem.spacer()
-      : isSpacer = true,
-        index = null,
-        title = null,
-        icon = null;
-
-  final bool isSpacer;
-  final int? index;
-  final String? title;
-  final IconData? icon;
-}
-
-class AppBottomAppBar extends ConsumerWidget {
-  const AppBottomAppBar({Key? key, required this.tabsRouter}) : super(key: key);
-
-  final TabsRouter tabsRouter;
+class HomeBottomAppBar extends ConsumerWidget {
+  const HomeBottomAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final tabsRouter = AutoTabsRouter.of(context);
     final theme = ref.read(themeProvider);
 
-    const tabItems = [
-      TabItem(index: 0, title: 'Dashboard', icon: Icons.dashboard_rounded),
-      TabItem(index: 1, title: 'Tasks', icon: Icons.list_rounded),
-      TabItem.spacer(),
-      TabItem(index: 2, title: 'Calendar', icon: Icons.calendar_today_rounded),
-      TabItem(index: 3, title: 'Tools', icon: Icons.handyman_rounded),
-    ];
+    Widget toTabItem(int index, HomeTabPage tabPage) {
+      return IconButton(
+        tooltip: tabPage.title,
+        iconSize: 32,
+        icon: Icon(tabPage.iconData),
+        color: tabsRouter.activeIndex == index ? theme.primary : null,
+        onPressed: () {
+          tabsRouter.setActiveIndex(index);
+        },
+      );
+    }
 
     return BottomAppBar(
       elevation: 0,
@@ -48,23 +37,11 @@ class AppBottomAppBar extends ConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            ...tabItems.map(
-              (tabItem) {
-                if (tabItem.isSpacer) {
-                  return const SizedBox();
-                } else {
-                  return IconButton(
-                    tooltip: tabItem.title,
-                    iconSize: 32,
-                    icon: Icon(tabItem.icon),
-                    color: tabsRouter.activeIndex == tabItem.index ? theme.primary : null,
-                    onPressed: () {
-                      tabsRouter.setActiveIndex(tabItem.index!);
-                    },
-                  );
-                }
-              },
-            ),
+            toTabItem(0, const DashboardPage()),
+            toTabItem(1, const TasksPage()),
+            const SizedBox(),
+            toTabItem(2, const CalendarPage()),
+            toTabItem(3, const ToolsPage()),
           ],
         ),
       ),
