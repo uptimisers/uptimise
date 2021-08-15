@@ -3,7 +3,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:jiffy/jiffy.dart';
 
+import '../../models/task.dart';
 import '../app_bar.dart';
 import '../router/router.gr.dart';
 import '../theme.dart';
@@ -67,6 +69,13 @@ class HomePage extends ConsumerWidget {
                 labelStyle: Theme.of(context).textTheme.bodyText1,
                 onTap: () {
                   // TODO: show create task dialog
+                  Task.create(
+                    ref,
+                    title: 'Temporary Placeholder',
+                    subject: 'test',
+                    dueDateTime: Jiffy(),
+                    priority: TaskPriority.low,
+                  );
                 },
                 child: Icon(Icons.task_rounded, color: theme.primary),
               ),

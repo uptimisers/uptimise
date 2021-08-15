@@ -23,6 +23,7 @@ dependencies: # Unsupported OS(s) listed in comments
   flutter_speed_dial: ^4.0.0
   google_sign_in: ^5.0.0 # macos # TODO: figure out what to do for macos
   hooks_riverpod: ^1.0.0-dev.6
+  jiffy: ^4.0.0
   logger: ^1.0.0
   responsive_builder: 0.4.1
   shared_preferences: ^2.0.0

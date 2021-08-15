@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../models/task.dart';
 import '../services/prefs_service.dart';
 
 final themeModeProvider = StateProvider<ThemeMode>((ref) {
@@ -45,6 +47,7 @@ class AppTheme {
     required Color error,
     required this.hyperlink,
     required this.hyperlinkDisabled,
+    required this.taskPriorityColors,
   })  : _primary50 = primary50,
         _primary100 = primary100,
         _primary200 = primary200,
@@ -81,6 +84,8 @@ class AppTheme {
 
   final Color hyperlink;
   final Color hyperlinkDisabled;
+
+  final Map<TaskPriority, Color> taskPriorityColors;
 
   Color get primary => _primary500;
   Color get primaryWeak => _primary200;
@@ -202,4 +207,10 @@ const lightTheme = AppTheme(
   // Hyperlink
   hyperlink: Color(0xFF0097A7),
   hyperlinkDisabled: Color(0xFF607D8B),
+  // Task Priority
+  taskPriorityColors: {
+    TaskPriority.veryHigh: Color(0xFFEFC7D2),
+    TaskPriority.high: Color(0xFFFFD6C3),
+    TaskPriority.low: Color(0xFFC7EBDC),
+  },
 );
