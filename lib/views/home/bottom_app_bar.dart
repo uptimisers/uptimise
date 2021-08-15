@@ -7,7 +7,6 @@ import 'calendar/calendar_page.dart';
 import 'dashboard/dashboard_page.dart';
 import 'home_page.dart';
 import 'tasks/tasks_page.dart';
-import 'tools/tools_page.dart';
 
 class HomeBottomAppBar extends ConsumerWidget {
   const HomeBottomAppBar({Key? key}) : super(key: key);
@@ -15,7 +14,7 @@ class HomeBottomAppBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tabsRouter = AutoTabsRouter.of(context);
-    final theme = ref.read(themeProvider);
+    final theme = ref.watch(themeProvider);
 
     Widget toTabItem(int index, HomeTabPage tabPage) {
       return IconButton(
@@ -34,15 +33,16 @@ class HomeBottomAppBar extends ConsumerWidget {
       color: theme.backgroundAccented,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            toTabItem(0, const DashboardPage()),
-            toTabItem(1, const TasksPage()),
-            const SizedBox(),
-            toTabItem(2, const CalendarPage()),
-            toTabItem(3, const ToolsPage()),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(right: 32),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              toTabItem(0, const DashboardPage()),
+              toTabItem(1, const TasksPage()),
+              toTabItem(2, const CalendarPage()),
+            ],
+          ),
         ),
       ),
     );

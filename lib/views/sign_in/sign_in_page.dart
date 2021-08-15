@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../services/auth_service.dart';
 import '../../services/log_service.dart';
-import '../dialog.dart';
+import '../alerts.dart';
 import '../router/router.dart';
 
 class SignInPage extends HookConsumerWidget {
@@ -15,9 +15,9 @@ class SignInPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final log = ref.read(loggerProvider);
-    final router = ref.read(routerProvider);
-    final auth = ref.read(authProvider);
+    final log = ref.watch(loggerProvider);
+    final router = ref.watch(routerProvider);
+    final auth = ref.watch(authProvider);
 
     Future<void> signIn() async {
       try {
@@ -33,7 +33,8 @@ class SignInPage extends HookConsumerWidget {
         return;
       }
 
-      log.i('${auth.user!.displayName} (${auth.user!.email}) signed in');
+      final user = ref.read(userProvider).data!.value!;
+      log.i('${user.displayName} (${user.email}) signed in');
       final path = router.current.queryParams.get('to', '/') as String;
       await router.replaceNamed(path);
     }

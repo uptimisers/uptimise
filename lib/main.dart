@@ -71,10 +71,10 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final analytics = ref.read(analyticsProvider);
+    final analytics = ref.watch(analyticsProvider);
     final theme = ref.watch(themeProvider);
     final themeMode = ref.watch(themeModeProvider);
-    final router = ref.read(routerProvider);
+    final router = ref.watch(routerProvider);
 
     // Update status bar
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../services/auth_service.dart';
+import 'home/menu.dart';
 import 'router/router.dart';
-import 'router/router.gr.dart';
 
 class AppAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const AppAppBar({Key? key, required this.title, required this.showProfile}) : super(key: key);
@@ -18,8 +18,8 @@ class AppAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final auth = ref.read(authProvider);
-    final router = ref.read(routerProvider);
+    final user = ref.watch(userProvider);
+    final router = ref.watch(routerProvider);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -33,7 +33,7 @@ class AppAppBar extends ConsumerWidget implements PreferredSizeWidget {
               )
             : null,
         actions: [
-          if (showProfile)
+          if (showProfile && user.data?.value != null)
             Center(
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -43,14 +43,12 @@ class AppAppBar extends ConsumerWidget implements PreferredSizeWidget {
                   clipBehavior: Clip.hardEdge,
                   color: Colors.transparent,
                   child: CircleAvatar(
-                    backgroundImage: NetworkImage(auth.user!.photoURL!),
+                    backgroundImage: NetworkImage(user.data!.value!.photoURL!),
                     radius: 28,
                     child: Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        onTap: () {
-                          router.push(const ProfileRoute());
-                        },
+                        onTap: () => showHomeMenu(context),
                       ),
                     ),
                   ),
