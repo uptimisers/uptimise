@@ -1,12 +1,32 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+
+import '../router/router.gr.dart';
+import 'bottom_app_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('Home')),
+    return AutoTabsRouter(
+      routes: const [
+        DashboardRoute(),
+        TasksRoute(),
+        CalendarRoute(),
+        ToolsRoute(),
+      ],
+      builder: (context, child, animation) {
+        final tabsRouter = AutoTabsRouter.of(context);
+
+        return Scaffold(
+          body: FadeTransition(
+            opacity: animation,
+            child: child,
+          ),
+          bottomNavigationBar: AppBottomAppBar(tabsRouter: tabsRouter),
+        );
+      },
     );
   }
 }
