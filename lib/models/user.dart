@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:jiffy/jiffy.dart';
 
 import '../services/auth_service.dart';
+import 'session.dart';
 import 'task.dart';
 
 final userProvider = Provider<AppUser?>((ref) {
@@ -23,6 +24,18 @@ AutoDisposeStreamProvider<List<State>> _createDocsProvider<State>({
   });
 }
 
+AutoDisposeStreamProvider<State?> _createDocProvider<State>({
+  required Query query,
+  required State Function(DocumentSnapshot) map,
+}) {
+  return StreamProvider.autoDispose<State?>((ref) {
+    return query.snapshots().asyncMap((_) async {
+      final snapshot = await query.get();
+      return snapshot.docs.isNotEmpty ? map(snapshot.docs.single) : null;
+    });
+  });
+}
+
 class AppUser {
   // ignore: prefer_initializing_formals
   AppUser(auth.User authUser) : info = authUser;
@@ -31,12 +44,14 @@ class AppUser {
 
   DocumentReference get _doc => FirebaseFirestore.instance.collection('users').doc(info.uid);
 
+  // Tasks
+
   late final incompleteTasksProvider = _createDocsProvider<Task>(
     query: _doc.collection('tasks').where('isCompleted', isEqualTo: false),
     map: (doc) => Task.fromDoc(doc),
   );
 
-  Future<void> createTask({
+  Future<Task> createTask({
     required String title,
     required String subject,
     required Jiffy dueDateTime,
@@ -49,4 +64,20 @@ class AppUser {
         dueDateTime: dueDateTime,
         priority: priority,
       );
+
+  // Session
+
+  late final currentSessionProvider = _createDocProvider<Session>(
+    query: _doc.collection('sessions').where('endDateTime', isNull: true),
+    map: (doc) => Session.fromDoc(doc),
+  );
+
+  Future<Session> startSession() async {
+    final snapshot = await _doc.collection('sessions').where('endDateTime', isNull: true).get();
+    if (snapshot.docs.isNotEmpty) {
+      throw Exception('Attempted to start a session during another session');
+    }
+
+    return Session.start(_doc.collection('sessions'));
+  }
 }
