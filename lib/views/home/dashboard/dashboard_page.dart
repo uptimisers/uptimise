@@ -37,7 +37,10 @@ class DashboardPage extends HookConsumerWidget with HomeTabPage {
         session?.startDateTime.clone().add(minutes: 25).diff(Jiffy(), Units.MINUTE);
     // workaround to rebuild every minute
     final _timer = useState(0);
-    Timer.periodic(const Duration(minutes: 1), (timer) => ++_timer.value);
+    useEffect(() {
+      final timer = Timer.periodic(const Duration(minutes: 1), (timer) => ++_timer.value);
+      return timer.cancel;
+    });
 
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 16),
