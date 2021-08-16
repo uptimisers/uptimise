@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:jiffy/jiffy.dart';
 
 import '../services/auth_service.dart';
+import 'session.dart';
 import 'task.dart';
 
 final userProvider = Provider<AppUser?>((ref) {
@@ -36,7 +37,7 @@ class AppUser {
     map: (doc) => Task.fromDoc(doc),
   );
 
-  Future<void> createTask({
+  Future<Task> createTask({
     required String title,
     required String subject,
     required Jiffy dueDateTime,
@@ -49,4 +50,6 @@ class AppUser {
         dueDateTime: dueDateTime,
         priority: priority,
       );
+
+  Future<Session> startSession() => Session.start(_doc.collection('sessions'));
 }
