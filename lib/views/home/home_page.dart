@@ -77,8 +77,7 @@ class HomePage extends ConsumerWidget {
               ),
             ],
           ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-          // Custom BottomAppBar used instead of BottomNavigationBar for FAB
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           bottomNavigationBar: const HomeBottomAppBar(),
           body: PageTransitionSwitcher(
             transitionBuilder: (child, primaryAnimation, secondaryAnimation) {

@@ -32,15 +32,12 @@ class HomeBottomAppBar extends ConsumerWidget {
       color: theme.backgroundAccented,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),
-        child: Padding(
-          padding: const EdgeInsets.only(right: 32),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              toTabItem(0, const DashboardPage()),
-              toTabItem(1, const TasksPage()),
-            ],
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            toTabItem(0, const DashboardPage()),
+            toTabItem(1, const TasksPage()),
+          ],
         ),
       ),
     );
