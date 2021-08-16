@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../theme.dart';
-import 'calendar/calendar_page.dart';
 import 'dashboard/dashboard_page.dart';
 import 'home_page.dart';
 import 'tasks/tasks_page.dart';
@@ -33,16 +32,12 @@ class HomeBottomAppBar extends ConsumerWidget {
       color: theme.backgroundAccented,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),
-        child: Padding(
-          padding: const EdgeInsets.only(right: 32),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              toTabItem(0, const DashboardPage()),
-              toTabItem(1, const TasksPage()),
-              toTabItem(2, const CalendarPage()),
-            ],
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            toTabItem(0, const DashboardPage()),
+            toTabItem(1, const TasksPage()),
+          ],
         ),
       ),
     );

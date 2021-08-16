@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../services/auth_service.dart';
 import '../router/router.dart';
 import '../router/router.gr.dart';
 import '../theme.dart';
@@ -10,6 +11,7 @@ Future<void> showHomeMenu(BuildContext context) async {
     context: context,
     builder: (context) => Consumer(builder: (context, ref, child) {
       final theme = ref.watch(themeProvider);
+      final auth = ref.watch(authProvider);
       final router = ref.watch(routerProvider);
 
       return SimpleDialog(
@@ -68,6 +70,17 @@ Future<void> showHomeMenu(BuildContext context) async {
             onTap: () {
               Navigator.of(context).pop();
               // TODO: open help & feedback url
+            },
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.exit_to_app_rounded,
+              color: theme.foreground,
+            ),
+            title: const Text('Sign Out'),
+            onTap: () async {
+              await auth.signOut();
+              await router.replace(const SignInRoute());
             },
           ),
           const Divider(),
