@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:jiffy/jiffy.dart';
 
@@ -6,7 +9,7 @@ import '../../../models/user.dart';
 import '../../theme.dart';
 import '../home_page.dart';
 
-class DashboardPage extends ConsumerWidget with HomeTabPage {
+class DashboardPage extends HookConsumerWidget with HomeTabPage {
   const DashboardPage({Key? key}) : super(key: key);
 
   @override
@@ -18,16 +21,23 @@ class DashboardPage extends ConsumerWidget with HomeTabPage {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
-    final incompleteTasks = ref.watch(user.incompleteTasksProvider);
-    final currentSession = ref.watch(user.currentSessionProvider);
 
+    final incompleteTasks = ref.watch(user.incompleteTasksProvider);
     final tasksDueSoon = incompleteTasks.data?.value
         .where((task) =>
             Jiffy().isSame(task.dueDateTime, Units.DAY) ||
             Jiffy().add(days: 1).isSame(task.dueDateTime, Units.DAY))
         .toList()
           ?..sort((a, b) => a.dueDateTime.dateTime.compareTo(b.dueDateTime.dateTime));
+
+    final currentSession = ref.watch(user.currentSessionProvider);
     final session = currentSession.data?.value;
+    // TODO: set up pomodoro timer
+    final sessionTimeLeft =
+        session?.startDateTime.clone().add(minutes: 25).diff(Jiffy(), Units.MINUTE);
+    // workaround to rebuild every minute
+    final _timer = useState(0);
+    Timer.periodic(const Duration(minutes: 1), (timer) => ++_timer.value);
 
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -61,9 +71,7 @@ class DashboardPage extends ConsumerWidget with HomeTabPage {
                       style: Theme.of(context).textTheme.subtitle1,
                       children: <TextSpan>[
                         TextSpan(
-                          // TODO: set up pomodoro timer
-                          text:
-                              '${session.startDateTime.add(minutes: 25).diff(Jiffy(), Units.MINUTE)} ',
+                          text: '$sessionTimeLeft ',
                           style: Theme.of(context).textTheme.headline4,
                         ),
                         TextSpan(
