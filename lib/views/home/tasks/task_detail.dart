@@ -7,6 +7,7 @@ import '../../../models/task.dart';
 import '../../../models/user.dart';
 import '../../alerts.dart';
 import '../../app_bar.dart';
+import 'task_edit.dart';
 
 class TaskDetailPage extends HookConsumerWidget {
   const TaskDetailPage({Key? key, @PathParam('id') required this.id}) : super(key: key);
@@ -18,6 +19,10 @@ class TaskDetailPage extends HookConsumerWidget {
     final user = ref.watch(userProvider)!;
     final incompleteTasks = ref.watch(user.incompleteTasksProvider);
     final isRefreshing = useState<bool>(false);
+
+    final titleController = useTextEditingController();
+    final subjectController = useTextEditingController();
+    final dueDateTimeController = useTextEditingController();
 
     return Scaffold(
       appBar: const AppAppBar(
@@ -32,8 +37,7 @@ class TaskDetailPage extends HookConsumerWidget {
           if (task == null) {
             return const Center(child: Text('Task Not Found'));
           } else {
-            // TODO: implement task detail
-            return Center(child: Text(task.title));
+            return TaskDetail(task, titleController, subjectController, dueDateTimeController);
           }
         },
         loading: (_) => const Center(child: CircularProgressIndicator()),
