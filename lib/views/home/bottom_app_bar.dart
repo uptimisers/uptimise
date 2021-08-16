@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../theme.dart';
-import 'calendar/calendar_page.dart';
 import 'dashboard/dashboard_page.dart';
 import 'home_page.dart';
 import 'tasks/tasks_page.dart';
@@ -40,7 +39,6 @@ class HomeBottomAppBar extends ConsumerWidget {
             children: [
               toTabItem(0, const DashboardPage()),
               toTabItem(1, const TasksPage()),
-              toTabItem(2, const CalendarPage()),
             ],
           ),
         ),

@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../services/auth_service.dart';
-import '../home/calendar/calendar_page.dart';
 import '../home/dashboard/dashboard_page.dart';
 import '../home/home_page.dart';
 import '../home/sessions/start_session_page.dart';
@@ -31,10 +30,6 @@ import 'router.gr.dart';
         AutoRoute<void>(
           path: 'tasks',
           page: TasksPage,
-        ),
-        AutoRoute<void>(
-          path: 'calendar',
-          page: CalendarPage,
         ),
       ],
     ),

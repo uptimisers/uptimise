@@ -6,7 +6,6 @@
 
 import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
-import 'package:uptimise/views/home/calendar/calendar_page.dart' as _i15;
 import 'package:uptimise/views/home/dashboard/dashboard_page.dart' as _i13;
 import 'package:uptimise/views/home/home_page.dart' as _i4;
 import 'package:uptimise/views/home/sessions/start_session_page.dart' as _i8;
@@ -91,11 +90,6 @@ class AppRouter extends _i1.RootStackRouter {
         routeData: routeData,
         builder: (_) {
           return const _i14.TasksPage();
-        }),
-    CalendarRoute.name: (routeData) => _i1.AdaptivePage<void>(
-        routeData: routeData,
-        builder: (_) {
-          return const _i15.CalendarPage();
         })
   };
 
@@ -105,8 +99,7 @@ class AppRouter extends _i1.RootStackRouter {
           authGuard
         ], children: [
           _i1.RouteConfig(DashboardRoute.name, path: 'dashboard'),
-          _i1.RouteConfig(TasksRoute.name, path: 'tasks'),
-          _i1.RouteConfig(CalendarRoute.name, path: 'calendar')
+          _i1.RouteConfig(TasksRoute.name, path: 'tasks')
         ]),
         _i1.RouteConfig(TaskDetailRoute.name, path: '/task/:id'),
         _i1.RouteConfig(CreateTaskRoute.name, path: '/create-task'),
@@ -199,10 +192,4 @@ class TasksRoute extends _i1.PageRouteInfo {
   const TasksRoute() : super(name, path: 'tasks');
 
   static const String name = 'TasksRoute';
-}
-
-class CalendarRoute extends _i1.PageRouteInfo {
-  const CalendarRoute() : super(name, path: 'calendar');
-
-  static const String name = 'CalendarRoute';
 }
