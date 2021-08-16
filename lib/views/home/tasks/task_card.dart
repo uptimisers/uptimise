@@ -21,8 +21,6 @@ class TaskCard extends ConsumerWidget {
       onDismissed: (direction) => task.markAsCompleted(),
       child: Card(
         color: theme.taskPriorityColors[task.priority],
-        elevation: 6,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: InkWell(
           onTap: () => router.push(TaskDetailRoute(id: task.id)),
           child: Padding(

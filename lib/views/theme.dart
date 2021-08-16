@@ -167,6 +167,12 @@ class AppTheme {
         textSelectionTheme: TextSelectionThemeData(
           cursorColor: primary,
         ),
+        cardTheme: CardTheme(
+          elevation: 6,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
       );
 
   TextStyle get codeTextStyle => TextStyle(

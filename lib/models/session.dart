@@ -53,7 +53,7 @@ class Session {
   final Jiffy? endDateTime;
   final List<Rest> rests;
 
-  bool get isBreak => rests.any((rest) => rest.endDateTime != null);
+  bool get isRest => rests.any((rest) => rest.endDateTime != null);
 
   static Future<Session> start(CollectionReference sessionsRef) async {
     final doc = await sessionsRef.add(<String, dynamic>{
@@ -65,7 +65,7 @@ class Session {
   }
 
   Future<void> end() async {
-    if (isBreak) {
+    if (isRest) {
       final restIndex = rests.indexWhere((rest) => rest.endDateTime != null);
       rests[restIndex] = rests[restIndex].copyWith(endDateTime: endDateTime);
       await uploadBreaks();
