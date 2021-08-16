@@ -78,7 +78,10 @@ Future<void> showHomeMenu(BuildContext context) async {
               color: theme.foreground,
             ),
             title: const Text('Sign Out'),
-            onTap: auth.signOut,
+            onTap: () async {
+              await auth.signOut();
+              await router.replace(const SignInRoute());
+            },
           ),
           const Divider(),
           Center(
