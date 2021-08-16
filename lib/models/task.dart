@@ -1,27 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:jiffy/jiffy.dart';
-
-import '../services/auth_service.dart';
-
-final incompleteTasksProvider = StreamProvider.autoDispose<List<Task>?>((ref) {
-  final userDoc = ref.watch(userDocProvider);
-  if (userDoc == null) {
-    return Stream.value(null).asBroadcastStream();
-  } else {
-    ref.maintainState = true;
-    final incompleteTasks = userDoc.collection('tasks').where('isCompleted', isEqualTo: false);
-    return incompleteTasks.snapshots().asyncMap((_) async {
-      final snapshot = await incompleteTasks.get();
-      return snapshot.docs.map((doc) => Task.fromDoc(doc)).toList();
-    }).asBroadcastStream();
-  }
-});
 
 enum TaskPriority { veryHigh, high, low }
 
 class Task {
   const Task({
+    required this.doc,
     required this.id,
     required this.title,
     required this.subject,
@@ -30,14 +14,16 @@ class Task {
     this.isCompleted = false,
   });
 
-  Task.fromDoc(QueryDocumentSnapshot doc)
-      : id = doc.id,
-        title = doc.get('title') as String,
-        subject = doc.get('subject') as String,
-        dueDateTime = Jiffy((doc.get('dueDateTime') as Timestamp).toDate()),
-        priority = TaskPriority.values[doc.get('priority') as int],
-        isCompleted = doc.get('isCompleted') as bool;
+  Task.fromDoc(DocumentSnapshot snapshot)
+      : doc = snapshot.reference,
+        id = snapshot.id,
+        title = snapshot.get('title') as String,
+        subject = snapshot.get('subject') as String,
+        dueDateTime = Jiffy((snapshot.get('dueDateTime') as Timestamp).toDate()),
+        priority = TaskPriority.values[snapshot.get('priority') as int],
+        isCompleted = snapshot.get('isCompleted') as bool;
 
+  final DocumentReference doc;
   final String id;
   final String title;
   final String subject;
@@ -46,14 +32,13 @@ class Task {
   final bool isCompleted;
 
   static Future<Task> create(
-    WidgetRef ref, {
+    CollectionReference tasksRef, {
     required String title,
     required String subject,
     required Jiffy dueDateTime,
     required TaskPriority priority,
   }) async {
-    final userDoc = ref.read(userDocProvider);
-    final doc = await userDoc!.collection('tasks').add(<String, dynamic>{
+    final doc = await tasksRef.add(<String, dynamic>{
       'title': title,
       'subject': subject,
       'dueDateTime': dueDateTime.dateTime,
@@ -61,6 +46,7 @@ class Task {
       'isCompleted': false,
     });
     return Task(
+      doc: doc,
       id: doc.id,
       title: title,
       subject: subject,
@@ -69,11 +55,7 @@ class Task {
     );
   }
 
-  DocumentReference doc(WidgetRef ref) {
-    return ref.read(userDocProvider)!.collection('tasks').doc(id);
-  }
-
-  Future<void> markAsCompleted(WidgetRef ref) async {
-    await doc(ref).update({'isCompleted': true});
+  Future<void> markAsCompleted() async {
+    await doc.update({'isCompleted': true});
   }
 }

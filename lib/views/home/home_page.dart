@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:jiffy/jiffy.dart';
 
 import '../../models/task.dart';
+import '../../models/user.dart';
 import '../app_bar.dart';
 import '../router/router.dart';
 import '../router/router.gr.dart';
@@ -24,6 +25,7 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(userProvider)!;
     final theme = ref.watch(themeProvider);
     final router = ref.watch(routerProvider);
 
@@ -65,8 +67,7 @@ class HomePage extends ConsumerWidget {
                 onTap: () {
                   // TODO: Uncomment router.push and remove Task.create
                   // router.push(const CreateTaskRoute());
-                  Task.create(
-                    ref,
+                  user.createTask(
                     title: 'Temporary Placeholder',
                     subject: 'test',
                     dueDateTime: Jiffy(),

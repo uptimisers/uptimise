@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../services/auth_service.dart';
+import '../models/user.dart';
 import 'home/menu.dart';
 import 'router/router.dart';
 
@@ -18,7 +18,7 @@ class AppAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider);
+    final user = ref.watch(userProvider)!;
     final router = ref.watch(routerProvider);
 
     return Padding(
@@ -33,7 +33,7 @@ class AppAppBar extends ConsumerWidget implements PreferredSizeWidget {
               )
             : null,
         actions: [
-          if (showProfile && user.data?.value != null)
+          if (showProfile)
             Center(
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -43,7 +43,7 @@ class AppAppBar extends ConsumerWidget implements PreferredSizeWidget {
                   clipBehavior: Clip.hardEdge,
                   color: Colors.transparent,
                   child: CircleAvatar(
-                    backgroundImage: NetworkImage(user.data!.value!.photoURL!),
+                    backgroundImage: NetworkImage(user.info.photoURL!),
                     radius: 28,
                     child: Material(
                       color: Colors.transparent,

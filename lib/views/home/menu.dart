@@ -11,7 +11,7 @@ Future<void> showHomeMenu(BuildContext context) async {
     context: context,
     builder: (context) => Consumer(builder: (context, ref, child) {
       final theme = ref.watch(themeProvider);
-      final auth = ref.watch(authProvider);
+      final auth = ref.watch(authProvider.notifier);
       final router = ref.watch(routerProvider);
 
       return SimpleDialog(

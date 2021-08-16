@@ -18,7 +18,7 @@ class TaskCard extends ConsumerWidget {
 
     return Dismissible(
       key: ValueKey(task.id),
-      onDismissed: (direction) => task.markAsCompleted(ref),
+      onDismissed: (direction) => task.markAsCompleted(),
       child: Card(
         color: theme.taskPriorityColors[task.priority],
         elevation: 6,

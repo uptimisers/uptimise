@@ -79,7 +79,7 @@ class AuthGuard extends AutoRouteGuard {
 
   @override
   Future<void> onNavigation(NavigationResolver resolver, StackRouter router) async {
-    final auth = ref.read(authProvider);
+    final auth = ref.read(authProvider.notifier);
     if (auth.isSignedIn) {
       resolver.next();
     } else {
@@ -96,7 +96,7 @@ class AlreadyAuthedGuard extends AutoRouteGuard {
 
   @override
   Future<void> onNavigation(NavigationResolver resolver, StackRouter router) async {
-    final auth = ref.read(authProvider);
+    final auth = ref.read(authProvider.notifier);
     if (!auth.isSignedIn) {
       resolver.next();
     } else {

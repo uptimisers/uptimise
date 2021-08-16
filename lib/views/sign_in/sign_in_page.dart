@@ -17,7 +17,7 @@ class SignInPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final log = ref.watch(loggerProvider);
     final router = ref.watch(routerProvider);
-    final auth = ref.watch(authProvider);
+    final auth = ref.watch(authProvider.notifier);
 
     Future<void> signIn() async {
       try {
@@ -33,8 +33,8 @@ class SignInPage extends HookConsumerWidget {
         return;
       }
 
-      final user = ref.read(userProvider).data!.value!;
-      log.i('${user.displayName} (${user.email}) signed in');
+      final authUser = FirebaseAuth.instance.currentUser;
+      log.i('${authUser?.displayName} (${authUser?.email}) signed in');
       final path = router.current.queryParams.get('to', '/') as String;
       await router.replaceNamed(path);
     }

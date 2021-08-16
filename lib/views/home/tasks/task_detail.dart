@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../models/task.dart';
+import '../../../models/user.dart';
 import '../../alerts.dart';
 import '../../app_bar.dart';
 
@@ -14,7 +15,8 @@ class TaskDetailPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final incompleteTasks = ref.watch(incompleteTasksProvider);
+    final user = ref.watch(userProvider)!;
+    final incompleteTasks = ref.watch(user.incompleteTasksProvider);
     final isRefreshing = useState<bool>(false);
 
     return Scaffold(
@@ -24,7 +26,7 @@ class TaskDetailPage extends HookConsumerWidget {
       ),
       body: incompleteTasks.map(
         data: (incompleteTasks) {
-          final task = incompleteTasks.value!
+          final task = incompleteTasks.value
               .cast<Task?>()
               .singleWhere((task) => task!.id == id, orElse: () => null);
           if (task == null) {
@@ -42,7 +44,7 @@ class TaskDetailPage extends HookConsumerWidget {
             onPressed: !isRefreshing.value
                 ? () {
                     isRefreshing.value = true;
-                    ref.refresh(incompleteTasksProvider);
+                    ref.refresh(user.incompleteTasksProvider);
                     isRefreshing.value = false;
                   }
                 : null,
