@@ -14,7 +14,7 @@ class SignInAbortedException implements Exception {
 }
 
 class AuthService extends StateNotifier<User?> {
-  AuthService() : super(null);
+  AuthService() : super(FirebaseAuth.instance.currentUser);
 
   bool get isSignedIn => state != null;
 
