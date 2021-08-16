@@ -45,14 +45,7 @@ class Task {
       'priority': priority.index,
       'isCompleted': false,
     });
-    return Task(
-      doc: doc,
-      id: doc.id,
-      title: title,
-      subject: subject,
-      dueDateTime: dueDateTime,
-      priority: priority,
-    );
+    return Task.fromDoc(await doc.get());
   }
 
   Future<void> markAsCompleted() async {
