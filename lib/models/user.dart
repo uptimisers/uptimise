@@ -24,6 +24,18 @@ AutoDisposeStreamProvider<List<State>> _createDocsProvider<State>({
   });
 }
 
+AutoDisposeStreamProvider<State?> _createDocProvider<State>({
+  required Query query,
+  required State Function(DocumentSnapshot) map,
+}) {
+  return StreamProvider.autoDispose<State?>((ref) {
+    return query.snapshots().asyncMap((_) async {
+      final snapshot = await query.get();
+      return snapshot.docs.isNotEmpty ? map(snapshot.docs.single) : null;
+    });
+  });
+}
+
 class AppUser {
   // ignore: prefer_initializing_formals
   AppUser(auth.User authUser) : info = authUser;
@@ -31,6 +43,8 @@ class AppUser {
   final auth.User info;
 
   DocumentReference get _doc => FirebaseFirestore.instance.collection('users').doc(info.uid);
+
+  // Tasks
 
   late final incompleteTasksProvider = _createDocsProvider<Task>(
     query: _doc.collection('tasks').where('isCompleted', isEqualTo: false),
@@ -51,5 +65,19 @@ class AppUser {
         priority: priority,
       );
 
-  Future<Session> startSession() => Session.start(_doc.collection('sessions'));
+  // Session
+
+  late final currentSessionProvider = _createDocProvider<Session>(
+    query: _doc.collection('sessions').where('endDateTime', isNull: true),
+    map: (doc) => Session.fromDoc(doc),
+  );
+
+  Future<Session> startSession() async {
+    final snapshot = await _doc.collection('sessions').where('endDateTime', isNull: true).get();
+    if (snapshot.docs.isNotEmpty) {
+      throw Exception('Attempted to start a session during another session');
+    }
+
+    return Session.start(_doc.collection('sessions'));
+  }
 }

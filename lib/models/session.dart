@@ -39,8 +39,11 @@ class Session {
       : doc = snapshot.reference,
         id = snapshot.id,
         startDateTime = Jiffy((snapshot.get('startDateTime') as Timestamp).toDate()),
-        endDateTime = Jiffy((snapshot.get('endDateTime') as Timestamp).toDate()),
-        rests = (snapshot.get('rests') as List<Map<String, dynamic>>)
+        endDateTime = snapshot.get('endDateTime') != null
+            ? Jiffy((snapshot.get('endDateTime') as Timestamp).toDate())
+            : null,
+        rests = (snapshot.get('rests') as List<dynamic>)
+            .cast<Map<String, dynamic>>()
             .map((map) => Rest.fromMap(map))
             .toList();
 
@@ -54,7 +57,7 @@ class Session {
 
   static Future<Session> start(CollectionReference sessionsRef) async {
     final doc = await sessionsRef.add(<String, dynamic>{
-      'startDateTime': Jiffy(),
+      'startDateTime': Jiffy().dateTime,
       'endDateTime': null,
       'rests': const <Rest>[],
     });

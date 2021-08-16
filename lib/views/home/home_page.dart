@@ -26,6 +26,7 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
+    final currentSession = ref.watch(user.currentSessionProvider);
     final theme = ref.watch(themeProvider);
     final router = ref.watch(routerProvider);
 
@@ -49,12 +50,13 @@ class HomePage extends ConsumerWidget {
             activeIcon: Icons.close_rounded,
             spacing: 16,
             children: [
-              SpeedDialChild(
-                label: 'Start session',
-                labelStyle: Theme.of(context).textTheme.bodyText1,
-                onTap: () => router.push(const StartSessionRoute()),
-                child: Icon(Icons.av_timer_rounded, color: theme.primary),
-              ),
+              if (currentSession.data?.value == null)
+                SpeedDialChild(
+                  label: 'Start session',
+                  labelStyle: Theme.of(context).textTheme.bodyText1,
+                  onTap: user.startSession,
+                  child: Icon(Icons.av_timer_rounded, color: theme.primary),
+                ),
               SpeedDialChild(
                 label: 'Import task',
                 labelStyle: Theme.of(context).textTheme.bodyText1,

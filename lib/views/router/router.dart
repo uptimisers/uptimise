@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../services/auth_service.dart';
 import '../home/dashboard/dashboard_page.dart';
 import '../home/home_page.dart';
-import '../home/sessions/start_session_page.dart';
 import '../home/tasks/create_task_page.dart';
 import '../home/tasks/import_task_page.dart';
 import '../home/tasks/task_detail.dart';
@@ -44,10 +43,6 @@ import 'router.gr.dart';
     AutoRoute<void>(
       path: '/import-task',
       page: ImportTaskPage,
-    ),
-    AutoRoute<void>(
-      path: '/start-session',
-      page: StartSessionPage,
     ),
     AutoRoute<void>(
       path: '/profile',
