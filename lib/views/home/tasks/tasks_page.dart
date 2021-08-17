@@ -45,15 +45,17 @@ class TasksPage extends HookConsumerWidget with HomeTabPage {
       loading: (_) => const Center(child: CircularProgressIndicator()),
       error: (e) {
         showErrorDialog(context, e.error, e.stackTrace ?? StackTrace.current, ref);
-        return IconButton(
-          icon: const Icon(Icons.refresh_rounded),
-          onPressed: !isRefreshing.value
-              ? () {
-                  isRefreshing.value = true;
-                  ref.refresh(user.incompleteTasksProvider);
-                  isRefreshing.value = false;
-                }
-              : null,
+        return Center(
+          child: IconButton(
+            icon: const Icon(Icons.refresh_rounded),
+            onPressed: !isRefreshing.value
+                ? () {
+                    isRefreshing.value = true;
+                    ref.refresh(user.incompleteTasksProvider);
+                    isRefreshing.value = false;
+                  }
+                : null,
+          ),
         );
       },
     );

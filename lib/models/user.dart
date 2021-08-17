@@ -54,6 +54,8 @@ class AppUser {
 
   late final incompleteTasksProvider = _createDocsProvider<Task>(
     query: _doc.collection('tasks').where('isCompleted', isEqualTo: false),
+    // .orderBy('priority')
+    // .orderBy('dueDateTime'),
     map: (doc) => Task.fromDoc(doc),
   );
 
