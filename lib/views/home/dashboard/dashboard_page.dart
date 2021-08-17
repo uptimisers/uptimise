@@ -6,6 +6,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:jiffy/jiffy.dart';
 
 import '../../../models/user.dart';
+import '../../router/router.dart';
+import '../../router/router.gr.dart';
 import '../../theme.dart';
 import '../home_page.dart';
 
@@ -21,6 +23,7 @@ class DashboardPage extends HookConsumerWidget with HomeTabPage {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
+    final router = ref.watch(routerProvider);
 
     final incompleteTasks = ref.watch(user.incompleteTasksProvider);
     final tasksDueSoon = incompleteTasks.data?.value
@@ -38,7 +41,7 @@ class DashboardPage extends HookConsumerWidget with HomeTabPage {
     // workaround to rebuild every minute
     final _timer = useState(0);
     useEffect(() {
-      final timer = Timer.periodic(const Duration(minutes: 1), (timer) => ++_timer.value);
+      final timer = Timer.periodic(const Duration(seconds: 5), (timer) => ++_timer.value);
       return timer.cancel;
     });
 
@@ -46,21 +49,6 @@ class DashboardPage extends HookConsumerWidget with HomeTabPage {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       physics: const BouncingScrollPhysics(),
       children: [
-        if (tasksDueSoon != null && tasksDueSoon.isNotEmpty)
-          DashboardCard(
-            iconData: Icons.pending_actions_rounded,
-            title: 'Due Soon',
-            child: Column(
-              children: [
-                ...tasksDueSoon.map((task) {
-                  return ListTile(
-                    title: Text(task.title),
-                    subtitle: Text(task.subject),
-                  );
-                }),
-              ],
-            ),
-          ),
         if (session != null)
           DashboardCard(
             iconData: Icons.av_timer_rounded,
@@ -90,6 +78,24 @@ class DashboardPage extends HookConsumerWidget with HomeTabPage {
                   ),
                 ],
               ),
+            ),
+          ),
+        if (tasksDueSoon != null && tasksDueSoon.isNotEmpty)
+          DashboardCard(
+            iconData: Icons.pending_actions_rounded,
+            title: 'Due Soon',
+            child: Column(
+              children: [
+                ...tasksDueSoon.map((task) {
+                  return ListTile(
+                    title: Text(task.title),
+                    subtitle: Text(task.subject),
+                    onTap: () {
+                      router.push(TaskDetailRoute(id: task.id));
+                    },
+                  );
+                }),
+              ],
             ),
           ),
       ],

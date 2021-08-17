@@ -24,10 +24,14 @@ class TasksPage extends HookConsumerWidget with HomeTabPage {
 
     return incompleteTasks.map(
       data: (incompleteTasks) => incompleteTasks.value.isEmpty
-          ? Center(
-              child: Text(
-                'Congratulations, you cleared all your tasks!',
-                style: Theme.of(context).textTheme.headline6,
+          ? Padding(
+              padding: const EdgeInsets.all(16),
+              child: Center(
+                child: Text(
+                  'Congratulations, you cleared all your tasks!',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
               ),
             )
           : ListView.builder(
@@ -41,15 +45,17 @@ class TasksPage extends HookConsumerWidget with HomeTabPage {
       loading: (_) => const Center(child: CircularProgressIndicator()),
       error: (e) {
         showErrorDialog(context, e.error, e.stackTrace ?? StackTrace.current, ref);
-        return IconButton(
-          icon: const Icon(Icons.refresh_rounded),
-          onPressed: !isRefreshing.value
-              ? () {
-                  isRefreshing.value = true;
-                  ref.refresh(user.incompleteTasksProvider);
-                  isRefreshing.value = false;
-                }
-              : null,
+        return Center(
+          child: IconButton(
+            icon: const Icon(Icons.refresh_rounded),
+            onPressed: !isRefreshing.value
+                ? () {
+                    isRefreshing.value = true;
+                    ref.refresh(user.incompleteTasksProvider);
+                    isRefreshing.value = false;
+                  }
+                : null,
+          ),
         );
       },
     );

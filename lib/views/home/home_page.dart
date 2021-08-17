@@ -66,16 +66,7 @@ class HomePage extends ConsumerWidget {
               SpeedDialChild(
                 label: 'Create task',
                 labelStyle: Theme.of(context).textTheme.bodyText1,
-                onTap: () {
-                  // TODO: Uncomment router.push and remove Task.create
-                  // router.push(const CreateTaskRoute());
-                  user.createTask(
-                    title: 'Temporary Placeholder',
-                    subject: 'test',
-                    dueDateTime: Jiffy(),
-                    priority: TaskPriority.low,
-                  );
-                },
+                onTap: () => router.push(const CreateTaskRoute()),
                 child: Icon(Icons.task_rounded, color: theme.primary),
               ),
             ],
