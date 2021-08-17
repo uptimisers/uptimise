@@ -125,7 +125,7 @@ class AppTheme {
         appBarTheme: AppBarTheme(
           brightness: Brightness.light,
           elevation: 0,
-          color: backgroundAccented,
+          color: Colors.transparent,
           iconTheme: IconThemeData(color: foreground),
           textTheme: TextTheme(
             headline6: TextStyle(

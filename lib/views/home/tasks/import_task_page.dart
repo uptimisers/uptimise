@@ -31,7 +31,7 @@ class ImportTaskPage extends ConsumerWidget {
       final courses = await auth.classroomApi!.courses.list(pageSize: 5); // TODO: lazy (pageSize)
       final list = <Item>[];
       for (final course in courses.courses!) {
-        print(course.name!);
+        print(course.name);
         final courseWork = await auth.classroomApi!.courses.courseWork
             .list(course.id!, pageSize: 5); // TODO: lazy (pageSize)
         if (courseWork.courseWork != null) {
