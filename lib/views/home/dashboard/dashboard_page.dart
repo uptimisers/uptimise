@@ -49,24 +49,6 @@ class DashboardPage extends HookConsumerWidget with HomeTabPage {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       physics: const BouncingScrollPhysics(),
       children: [
-        if (tasksDueSoon != null && tasksDueSoon.isNotEmpty)
-          DashboardCard(
-            iconData: Icons.pending_actions_rounded,
-            title: 'Due Soon',
-            child: Column(
-              children: [
-                ...tasksDueSoon.map((task) {
-                  return ListTile(
-                    title: Text(task.title),
-                    subtitle: Text(task.subject),
-                    onTap: () {
-                      router.push(TaskDetailRoute(id: task.id));
-                    },
-                  );
-                }),
-              ],
-            ),
-          ),
         if (session != null)
           DashboardCard(
             iconData: Icons.av_timer_rounded,
@@ -96,6 +78,24 @@ class DashboardPage extends HookConsumerWidget with HomeTabPage {
                   ),
                 ],
               ),
+            ),
+          ),
+        if (tasksDueSoon != null && tasksDueSoon.isNotEmpty)
+          DashboardCard(
+            iconData: Icons.pending_actions_rounded,
+            title: 'Due Soon',
+            child: Column(
+              children: [
+                ...tasksDueSoon.map((task) {
+                  return ListTile(
+                    title: Text(task.title),
+                    subtitle: Text(task.subject),
+                    onTap: () {
+                      router.push(TaskDetailRoute(id: task.id));
+                    },
+                  );
+                }),
+              ],
             ),
           ),
       ],
