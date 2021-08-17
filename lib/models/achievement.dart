@@ -1,31 +1,26 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 enum AchievementLevel { veryHigh, high, low }
 
 class Achievement {
   const Achievement({
-    // required this.doc,
-    required this.id,
     required this.title,
     required this.description,
-    required this.icon,
+    required this.iconData,
     required this.level,
   });
 
-  // Achievement.fromDoc(DocumentSnapshot snapshot)
-  //     : doc = snapshot.reference,
-  //       id = snapshot.id,
-  //       title = snapshot.get('title') as String,
-  //       description = snapshot.get('description') as String,
-  //       icon = snapshot.get('icon') as int,
-  //       level = AchievementLevel.values[snapshot.get('level') as int];
-
-  // TODO: firestore
-
-  // final DocumentReference doc;
-  final String id;
   final String title;
   final String description;
-  final int icon;
+  final IconData iconData;
   final AchievementLevel level;
 }
+
+const achievements = <String, Achievement>{
+  'pi_hours': Achievement(
+    title: 'Pi',
+    description: 'Achieve 3.14 hours of mugging in one sitting',
+    iconData: Icons.functions_rounded,
+    level: AchievementLevel.low,
+  ),
+};

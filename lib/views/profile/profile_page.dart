@@ -12,6 +12,7 @@ class ProfilePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
+    final achievementIds = ['pi_hours']; // TODO: fetch from provider in AppUser
 
     return Scaffold(
       appBar: const AppAppBar(
@@ -92,20 +93,14 @@ class ProfilePage extends HookConsumerWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 16),
             Text(
               'Achievements',
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.headline6,
             ),
-            // TODO: achievement list
-            AchievementCard(
-              Achievement(
-                id: 'A',
-                title: 'Nice',
-                description: 'Achieve 3.14 hours of mugging in one sitting',
-                icon: 983602,
-                level: AchievementLevel.values[2],
-              ),
-            ),
+            const SizedBox(height: 16),
+            // TODO: do more validation for achievementIds
+            ...achievementIds.map((id) => AchievementCard(achievements[id]!)),
           ],
         ),
       ),

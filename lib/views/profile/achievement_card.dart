@@ -18,9 +18,8 @@ class AchievementCard extends ConsumerWidget {
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: ListTile(
-          leading: Icon(IconData(achievement.icon, fontFamily: 'MaterialIcons')),
+          leading: Icon(achievement.iconData, size: 32),
           title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
