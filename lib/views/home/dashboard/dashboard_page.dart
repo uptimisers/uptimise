@@ -44,6 +44,7 @@ class DashboardPage extends HookConsumerWidget with HomeTabPage {
 
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 16),
+      physics: const BouncingScrollPhysics(),
       children: [
         if (tasksDueSoon != null && tasksDueSoon.isNotEmpty)
           DashboardCard(

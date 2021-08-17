@@ -44,6 +44,12 @@ class AppUser {
 
   DocumentReference get _doc => FirebaseFirestore.instance.collection('users').doc(info.uid);
 
+  // Properties
+
+  // TODO: store a list of achievement ids in user document
+  // TODO: store username in user document
+  // TODO: store theme type in user document
+
   // Tasks
 
   late final incompleteTasksProvider = _createDocsProvider<Task>(
