@@ -7,12 +7,17 @@ class ImportTaskPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: AppAppBar(
+    return Scaffold(
+      appBar: const AppAppBar(
         title: 'Import Task',
         showProfile: false,
       ),
-      body: Center(child: Text('Import Task')),
+      body: Center(
+        child: Text(
+          'coming soon',
+          style: Theme.of(context).textTheme.headline6,
+        ),
+      ),
     );
   }
 }

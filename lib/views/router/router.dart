@@ -6,7 +6,7 @@ import '../home/dashboard/dashboard_page.dart';
 import '../home/home_page.dart';
 import '../home/tasks/create_task_page.dart';
 import '../home/tasks/import_task_page.dart';
-import '../home/tasks/task_detail.dart';
+import '../home/tasks/task_detail_page.dart';
 import '../home/tasks/tasks_page.dart';
 import '../not_found/not_found_page.dart';
 import '../profile/profile_page.dart';

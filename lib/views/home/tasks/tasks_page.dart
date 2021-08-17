@@ -24,10 +24,14 @@ class TasksPage extends HookConsumerWidget with HomeTabPage {
 
     return incompleteTasks.map(
       data: (incompleteTasks) => incompleteTasks.value.isEmpty
-          ? Center(
-              child: Text(
-                'Congratulations, you cleared all your tasks!',
-                style: Theme.of(context).textTheme.headline6,
+          ? Padding(
+              padding: const EdgeInsets.all(16),
+              child: Center(
+                child: Text(
+                  'Congratulations, you cleared all your tasks!',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
               ),
             )
           : ListView.builder(

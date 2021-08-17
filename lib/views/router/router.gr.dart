@@ -10,7 +10,7 @@ import 'package:uptimise/views/home/dashboard/dashboard_page.dart' as _i12;
 import 'package:uptimise/views/home/home_page.dart' as _i4;
 import 'package:uptimise/views/home/tasks/create_task_page.dart' as _i6;
 import 'package:uptimise/views/home/tasks/import_task_page.dart' as _i7;
-import 'package:uptimise/views/home/tasks/task_detail.dart' as _i5;
+import 'package:uptimise/views/home/tasks/task_detail_page.dart' as _i5;
 import 'package:uptimise/views/home/tasks/tasks_page.dart' as _i13;
 import 'package:uptimise/views/not_found/not_found_page.dart' as _i11;
 import 'package:uptimise/views/profile/profile_page.dart' as _i8;
