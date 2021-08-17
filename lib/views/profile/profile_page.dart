@@ -35,75 +35,86 @@ class ProfilePage extends HookConsumerWidget {
                     user.info.displayName!,
                     style: Theme.of(context).textTheme.headline6,
                   ),
+                  const SizedBox(height: 4),
                   Text(
-                    '@username',
-                    style: Theme.of(context).textTheme.bodyText1,
-                  )
-                ],
-              ),
-              trailing: OutlinedButton(onPressed: () {}, child: const Text('Edit')),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Text(
-                          'Hours',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        Text(
-                          '0', // TODO: profile hours
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Text(
-                          'Follwers',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        Text(
-                          '0', // TODO: followers
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Text(
-                          'Following',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        Text(
-                          '0', // TODO: following
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
-                      ],
-                    ),
+                    '@skytect',
+                    style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ],
               ),
+              trailing: OutlinedButton(
+                onPressed: () {
+                  // TODO: set up editing username
+                },
+                child: const Text('Edit'),
+              ),
             ),
-            const SizedBox(height: 16),
-            Text(
-              'Achievements',
-              style: Theme.of(context).textTheme.headline6,
+            const SizedBox(height: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: const [
+                ProfileCounter(
+                  title: 'Hours',
+                  count: '32', // TODO: fetch from provider in AppUser
+                ),
+                // TODO: implement following
+                ProfileCounter(
+                  title: 'Followers',
+                  count: 'coming soon',
+                ),
+                ProfileCounter(
+                  title: 'Following',
+                  count: 'coming soon',
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
+            ListTile(
+              title: Text(
+                'Achievements',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            ),
             // TODO: do more validation for achievementIds
-            ...achievementIds.map((id) => AchievementCard(achievements[id]!)),
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                physics: const BouncingScrollPhysics(),
+                children: [
+                  ...achievementIds.map((id) => AchievementCard(achievements[id]!)),
+                ],
+              ),
+            ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class ProfileCounter extends StatelessWidget {
+  const ProfileCounter({
+    Key? key,
+    required this.title,
+    required this.count,
+  }) : super(key: key);
+
+  final String title;
+  final String count;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          title,
+          style: Theme.of(context).textTheme.bodyText1,
+        ),
+        Text(
+          count,
+          style: Theme.of(context).textTheme.bodyText2,
+        ),
+      ],
     );
   }
 }

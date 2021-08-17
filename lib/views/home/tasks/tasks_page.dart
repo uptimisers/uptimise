@@ -31,6 +31,7 @@ class TasksPage extends HookConsumerWidget with HomeTabPage {
               ),
             )
           : ListView.builder(
+              physics: const BouncingScrollPhysics(),
               itemCount: incompleteTasks.value.length,
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
