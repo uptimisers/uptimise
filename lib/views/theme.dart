@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../models/achievement.dart';
 import '../models/task.dart';
 import '../services/prefs_service.dart';
 
@@ -48,6 +49,7 @@ class AppTheme {
     required this.hyperlink,
     required this.hyperlinkDisabled,
     required this.taskPriorityColors,
+    required this.achievementLevelColors,
   })  : _primary50 = primary50,
         _primary100 = primary100,
         _primary200 = primary200,
@@ -86,6 +88,7 @@ class AppTheme {
   final Color hyperlinkDisabled;
 
   final Map<TaskPriority, Color> taskPriorityColors;
+  final Map<AchievementLevel, Color> achievementLevelColors;
 
   Color get primary => _primary500;
   Color get primaryWeak => _primary200;
@@ -218,5 +221,11 @@ const lightTheme = AppTheme(
     TaskPriority.veryHigh: Color(0xFFEFC7D2),
     TaskPriority.high: Color(0xFFFFD6C3),
     TaskPriority.low: Color(0xFFC7EBDC),
+  },
+  // Achievement Level
+  achievementLevelColors: {
+    AchievementLevel.veryHigh: Color(0xFFEFC7D2),
+    AchievementLevel.high: Color(0xFFFFD6C3),
+    AchievementLevel.low: Color(0xFFC7EBDC),
   },
 );
