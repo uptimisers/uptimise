@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -25,6 +27,18 @@ class CreateTaskPage extends HookConsumerWidget {
     final priority = useState<TaskPriority>(TaskPriority.low);
     final dueDateTime = useState<Jiffy>(Jiffy());
 
+    final hasError = useState<bool>(false); // TODO
+    final shakeAnimation = useAnimationController(
+      duration: const Duration(milliseconds: 200),
+      upperBound: 50,
+    );
+    final shakeValue = useAnimation(shakeAnimation);
+    void shake() {
+      shakeAnimation
+        ..reset()
+        ..forward();
+    }
+
     return Scaffold(
       appBar: const AppAppBar(
         title: 'Create Task',
@@ -34,12 +48,16 @@ class CreateTaskPage extends HookConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 24),
         children: [
           ListTile(
-            title: TextField(
-              controller: titleController,
-              style: Theme.of(context).textTheme.headline6,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                hintText: 'Title',
+            title: Transform.translate(
+              offset: Offset(sin(shakeValue * pi * 3) * 10, 0),
+              child: TextField(
+                controller: titleController,
+                style: Theme.of(context).textTheme.headline6,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Title',
+                  errorText: hasError.value ? 'Please fill me in' : null,
+                ),
               ),
             ),
             trailing: IconButton(
@@ -128,6 +146,13 @@ class CreateTaskPage extends HookConsumerWidget {
           Center(
             child: ElevatedButton(
               onPressed: () {
+                // TODO: more data validaiton
+                if (titleController.text.isEmpty) {
+                  hasError.value = true;
+                  shake();
+                  return;
+                }
+
                 user.createTask(
                   title: titleController.text,
                   subject: subjectController.text,
